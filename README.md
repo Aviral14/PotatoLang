@@ -1,4 +1,4 @@
-# ProLang
+# PotatoLang
 CS F363 Compiler Construction Project
 
 # Contributing
