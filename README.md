@@ -1,6 +1,23 @@
 # PotatoLang
 CS F363 Compiler Construction Project
 
+# Guides
+
+To build the project, execute -
+  ```
+  $ make all
+  ```
+
+To run the project, execute -
+  ```
+  $ ./compiler
+  ```
+  
+To delete all the build files, execute -
+  ```
+  $ make clean
+  ```
+
 # Contributing
 See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
