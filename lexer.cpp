@@ -3,32 +3,55 @@
 #include <string>
 #include <utility>
 
-using namespace std;
-
+/**
+ * Constructor
+ * @param code Full code to be lexed
+ */
 Lexer::Lexer(string code) {
     text = code;
     sp = text.begin();
     fp = text.end();
 }
 
+/**
+ * Returns the lexeme
+ * @return str, a string containing the lexeme
+ */
 string Lexer::getString() {
-    int i = 0;
-    char str[MAX_LEXEME_LENGTH];
-    for (; i < fp - sp; i++) {
-        str[i] = *(sp + i);
-    }
-    str[i] = '\0';
-    return (string)str;
+    /**
+     * Boring C-style method
+       char str[MAX_LEXEME_LENGTH];
+       for (int i = 0; i < fp - sp; i++) {
+           str[i] = *(sp + i);
+       }
+       str[fp - sp] = '\0';
+       return (string)str;
+     */
+    // vs chad C++ style string
+    string str(sp, fp);
+    return str;
 }
 
-void Lexer::handleError() {
+/**
+ * Handles the error
+ * TODO: Return Error code if necessary
+ *
+ */
+int Lexer::handleError() {
+    // seek till next whitespace
     while (*fp != ' ' && *fp != '\n' && *fp != '\t' && *fp != '$') {
         fp++;
     }
     sp = fp;
     fp--; // Retract fp
+    return 1;
 }
 
+/**
+ * Function to retrieve the lexeme and return it
+ * Side Effects on sp and fp
+ *
+ */
 lexResult Lexer::getLexeme() {
     string token, lexeme;
     while (true) {

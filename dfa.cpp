@@ -1,10 +1,14 @@
 #include "dfa.hpp"
-#include "config.hpp"
 
 DFA::DFA() {
     prev_state = curr_state = 0;
 }
-
+/**
+ * Identifies the character class for each character fed
+ *
+ * @param ch character to be identified
+ * @return character class of character
+ */
 characterClass DFA::identifyClass(char ch) {
     if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || ch == '_') {
         return ALPHA;
@@ -24,8 +28,15 @@ characterClass DFA::identifyClass(char ch) {
     }
 }
 
-int DFA::transition(int state, char ch) {
-    enum characterClass column = identifyClass(ch);
+/**
+ * Returns the next state
+ *
+ * @param currState Current state
+ * @param inputChar Input character read
+ * @return Next state of DFA
+ */
+int DFA::transition(int currState, char inputChar) {
+    enum characterClass column = identifyClass(inputChar);
     if (column == INVALID) {
         return -1; // -1 represents error state
     }
