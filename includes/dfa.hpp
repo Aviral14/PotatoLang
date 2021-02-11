@@ -1,6 +1,5 @@
 #ifndef DFA_H
 #define DFA_H
-
 class DFA {
   public:
     int curr_state;
@@ -10,7 +9,7 @@ class DFA {
     int transition(int, char);
 
   private:
-    auto identifyClass(char);
+    characterClass identifyClass(char);
 };
 
 #endif

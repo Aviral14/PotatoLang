@@ -17,7 +17,7 @@ class Lexer {
 
     // Fetches string between the Start Pointer and the Forward Pointer
     string getString();
-    void handleError();
+    int handleError();
 
   public:
     Lexer(string code);

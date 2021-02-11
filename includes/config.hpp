@@ -27,13 +27,13 @@ struct lexResult {
  */
 
 enum characterClass {
-    invalid = -1,
-    alpha = 0,
-    zero,
-    numeric,
-    dot,
-    whitespace,
-    eof
+    INVALID = -1,
+    ALPHA = 0,
+    ZERO,
+    NUMERIC,
+    DOT,
+    WHITESPACE,
+    ENDOFFILE
 };
 
 /**

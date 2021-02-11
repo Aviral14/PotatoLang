@@ -5,28 +5,28 @@ DFA::DFA() {
     prev_state = curr_state = 0;
 }
 
-auto DFA::identifyClass(char ch) {
+characterClass DFA::identifyClass(char ch) {
     if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || ch == '_') {
-        return alpha;
+        return ALPHA;
     } else if (ch == '0') {
-        return zero;
+        return ZERO;
     } else if (ch >= '1' && ch <= '9') {
-        return numeric;
+        return NUMERIC;
     } else if (ch == '.') {
-        return dot;
+        return DOT;
     } else if (ch == ' ' || ch == '\t' || ch == '\n') {
-        return whitespace;
+        return WHITESPACE;
     } else if (ch == '$') {
-        return eof;
+        return ENDOFFILE;
     } else {
         // invalid character;
-        return invalid;
+        return INVALID;
     }
 }
 
 int DFA::transition(int state, char ch) {
     enum characterClass column = identifyClass(ch);
-    if (column == invalid) {
+    if (column == INVALID) {
         return -1; // -1 represents error state
     }
     return transitionTable[curr_state][column];

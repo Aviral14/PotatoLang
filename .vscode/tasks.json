@@ -6,7 +6,7 @@
       {
         "label": "Build",
         "type": "shell",
-        "command": "make", //its like writing in console make //btw you can others commands like clean make build etc
+        "command": "make", //its like writing in console make //btw you can add others commands like clean make build etc
         "group": {
           "kind": "build",
           "isDefault": true
