@@ -1,6 +1,6 @@
 CC = g++
 OUT_DIR = build
-CFLAGS = -c -Wall -Werror -Wpedantic
+CFLAGS = -c -Wall -Werror -Wpedantic -g
 INC = -I includes
 all : compiler
 

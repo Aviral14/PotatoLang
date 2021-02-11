@@ -53,6 +53,3 @@ dkms.conf
 
 # Project Specific
 build
-
-# Text Editor
-.vscode
