@@ -1,6 +1,7 @@
-#pragma once // works as an include guard. Not a CPP standard but almost all
-             // compilers support it and is much faster since files don't have
-             // to be reopened
+#pragma once
+/* works as an include guard. Not a CPP standard but almost all   \
+              compilers support it and is much faster since files don't have \
+              to be reopened */
 
 #include <string>
 #include <utility>
@@ -37,5 +38,12 @@ enum characterClass {
     NUMERIC,
     DOT,
     WHITESPACE,
-    ENDOFFILE
+    ARITH,
+    LOGIC,
+    EQU,
+    DELIM,
+    QUOTE,
+    ENDOFFILE,
+    AND,
+    OR
 };

@@ -20,6 +20,20 @@ characterClass DFA::identifyClass(char ch) {
         return DOT;
     } else if (ch == ' ' || ch == '\t' || ch == '\n') {
         return WHITESPACE;
+    } else if (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '%') {
+        return ARITH;
+    } else if (ch == '<' || ch == '>' || ch == '!' || ch == ':') {
+        return LOGIC;
+    } else if (ch == '=') {
+        return EQU;
+    } else if (ch == '{' || ch == '}' || ch == '(' || ch == ')' || ch == ';' || ch == ',') {
+        return DELIM;
+    } else if (ch == '"') {
+        return QUOTE;
+    } else if (ch == '&') {
+        return AND;
+    } else if (ch == '|') {
+        return OR;
     } else if (ch == '$') {
         return ENDOFFILE;
     } else {
@@ -39,6 +53,10 @@ int DFA::transition(int currState, char inputChar) {
     enum characterClass column = identifyClass(inputChar);
     if (column == INVALID) {
         return -1; // -1 represents error state
+    } else if (column == AND || column == OR) {
+        return 98;
+    } else if (column == QUOTE) {
+        return 99;
     }
     return transitionTable[curr_state][column];
 }

@@ -14,11 +14,16 @@ class Lexer {
     string::iterator fp; /*!< forward pointer */
     string text;
     string lexeme;
+    int line;
     DFA dfa;
 
     string getString(); /*!< Fetches string between the Start Pointer and the
                            Forward Pointer. */
     int handleError();  /*!< Handle Error if any. */
+
+    int handleStringLiteral();
+
+    int handleAndsOrs();
 
   public:
     Lexer(string code);
@@ -26,8 +31,8 @@ class Lexer {
     /**
      * Iterates over the provided code
      * Tokenizes the code adhering to the Specified Regular Grammar
-     * Returns <<token,lexeme>,line number> pair
-     * @return lexResult, a <<token,lexeme>,line number> pair
+     * Returns {token,lexeme,line number} struct
+     * @return lexResult, a {token,lexeme,line number} pair
      */
     lexResult getLexeme();
 };

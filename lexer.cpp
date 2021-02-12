@@ -11,25 +11,15 @@ Lexer::Lexer(string code) {
     text = code;
     sp = text.begin();
     fp = text.end();
+    line = 0;
 }
 
 /**
  * Returns the lexeme
- * @return str, a string containing the lexeme
+ * @return a string containing the lexeme
  */
 string Lexer::getString() {
-    /**
-     * Boring C-style method
-       char str[MAX_LEXEME_LENGTH];
-       for (int i = 0; i < fp - sp; i++) {
-           str[i] = *(sp + i);
-       }
-       str[fp - sp] = '\0';
-       return (string)str;
-     */
-    // vs chad C++ style string
-    string str(sp, fp);
-    return str;
+    return string(sp, fp);
 }
 
 /**
@@ -37,13 +27,62 @@ string Lexer::getString() {
  * TODO: Return Error code if necessary
  *
  */
+int Lexer::handleStringLiteral() {
+    //handle string literal separately
+    while (*(++fp) != '"') {
+        if (*fp == '\\' &&
+            (*(fp + 1) != 'n' || *(fp + 1) != 'r' || *(fp + 1) != 't' || *(fp + 1) != '\\')) {
+            handleError();
+        } else if (*fp == '$') {
+            //oof get REKT
+            handleError();
+            return 1;
+        }
+    }
+    fp++;
+    dfa.prev_state = 99;
+    dfa.curr_state = 0;
+    return 0;
+}
+
+int Lexer::handleAndsOrs() {
+    //handle || and && separately
+    string oper(fp, fp + 2);
+    if (oper != "&&" && oper != "||") {
+        handleError();
+        return 1;
+    }
+    fp += 2;
+    dfa.prev_state = 98;
+    dfa.curr_state = 0;
+    return 0;
+}
+
 int Lexer::handleError() {
     // seek till next whitespace
+    if (*fp == '\\') {
+        sp = fp + 1;
+        cout << "Bad escape sequence " << string(fp, fp + 2)
+             << "\nIn Line number: " << line << endl;
+        return 2;
+    } else if (*fp == '&' || *fp == '|') {
+        sp = fp + 1;
+        cout << "Illegal Operator " << string(fp, fp + 1)
+             << "\nIn Line number: " << line << endl;
+        return 3;
+    } else if (*fp == '$') {
+        cout << "Illegal Termination"
+             << "\nIn Line number: " << line << endl;
+    } else {
+        cout << "Invalid Token found"
+             << "\nIn Line number: " << line << endl;
+    }
     while (*fp != ' ' && *fp != '\n' && *fp != '\t' && *fp != '$') {
         fp++;
     }
     sp = fp;
     fp--; // Retract fp
+    dfa.curr_state = 0;
     return 1;
 }
 
@@ -66,9 +105,13 @@ lexResult Lexer::getLexeme() {
 
         if (dfa.curr_state == 100) {
             return {"EOF", "$", 0}; // Reached End State
-        }
-        if (dfa.curr_state == -1) {
-            cout << "Error: Invalid Token found!" << endl;
+        } else if (dfa.curr_state == 99) {
+            if (handleStringLiteral())
+                continue;
+        } else if (dfa.curr_state == 98) {
+            if (handleAndsOrs())
+                continue;
+        } else if (dfa.curr_state == -1) {
             handleError();
             dfa.curr_state = 0; // Recover from Error State
             continue;
@@ -91,8 +134,17 @@ lexResult Lexer::getLexeme() {
             case 3:
                 token = "integer literal";
                 break;
-            case 4:
+            case 5:
                 token = "floating point literal";
+                break;
+            case 6:
+            case 7:
+            case 8:
+            case 98:
+                token = "operator";
+                break;
+            case 99:
+                token = "string literal";
                 break;
             }
             lexeme = getString();
