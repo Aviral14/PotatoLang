@@ -10,7 +10,7 @@ int main() {
     string code;
 #if TEST == 1
     code = "  abcdiu kopk90 9000 7821 0.718 0 fui_8932 00.456 9.120 00.456 00 "
-           "abc90 90_ 90   _fnsi + && - / <= >= == :=$";
+           "abc90 90_ 90   _fnsi + && - / <= >= == := float$";
 
 #else
     cout << "Enter Your Code" << endl;

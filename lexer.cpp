@@ -1,8 +1,12 @@
 #include "lexer.hpp"
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <utility>
+#include <vector>
 
+using std::find;
+using std::vector;
 /**
  * Constructor
  * @param code Full code to be lexed
@@ -126,9 +130,29 @@ lexResult Lexer::getLexeme() {
         // if curr_state = 0 and prev_state != 0 , we have reached the start
         // state and a lexeme has been identified
         if (!dfa.curr_state) {
+
+            lexeme = getString();
+            sp = fp;
+            fp--; // Retract fp
+
+            vector<string> keywords = {"int",
+                                       "float",
+                                       "boolean",
+                                       "string",
+                                       "while",
+                                       "until",
+                                       "if",
+                                       "else",
+                                       "true",
+                                       "false"};
+
             switch (dfa.prev_state) {
             case 1:
-                token = "identifier";
+                if (find(keywords.begin(), keywords.end(), lexeme) != keywords.end()) {
+                    token = "keyword";
+                } else {
+                    token = "identifier";
+                }
                 break;
             case 2:
             case 3:
@@ -147,9 +171,6 @@ lexResult Lexer::getLexeme() {
                 token = "string literal";
                 break;
             }
-            lexeme = getString();
-            sp = fp;
-            fp--; // Retract fp
             return {token, lexeme,
                     0}; // Line Number has been hardcoded as 0 for now
         }
