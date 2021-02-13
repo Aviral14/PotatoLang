@@ -1,5 +1,4 @@
 #include "dfa.hpp"
-
 DFA::DFA() {
     prev_state = curr_state = 0;
 }
@@ -11,34 +10,34 @@ DFA::DFA() {
  */
 characterClass DFA::identifyClass(char ch) {
     if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || ch == '_') {
-        return ALPHA;
+        return characterClass::ALPHA;
     } else if (ch == '0') {
-        return ZERO;
+        return characterClass::ZERO;
     } else if (ch >= '1' && ch <= '9') {
-        return NUMERIC;
+        return characterClass::NUMERIC;
     } else if (ch == '.') {
-        return DOT;
+        return characterClass::DOT;
     } else if (ch == ' ' || ch == '\t' || ch == '\n') {
-        return WHITESPACE;
+        return characterClass::WHITESPACE;
     } else if (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '%') {
-        return ARITH;
+        return characterClass::ARITH;
     } else if (ch == '<' || ch == '>' || ch == '!' || ch == ':') {
-        return LOGIC;
+        return characterClass::LOGIC;
     } else if (ch == '=') {
-        return EQU;
+        return characterClass::EQU;
     } else if (ch == '{' || ch == '}' || ch == '(' || ch == ')' || ch == ';' || ch == ',') {
-        return DELIM;
+        return characterClass::DELIM;
     } else if (ch == '"') {
-        return QUOTE;
+        return characterClass::QUOTE;
     } else if (ch == '&') {
-        return AND;
+        return characterClass::AND;
     } else if (ch == '|') {
-        return OR;
+        return characterClass::OR;
     } else if (ch == '$') {
-        return ENDOFFILE;
+        return characterClass::ENDOFFILE;
     } else {
         // invalid character;
-        return INVALID;
+        return characterClass::INVALID;
     }
 }
 
@@ -49,14 +48,12 @@ characterClass DFA::identifyClass(char ch) {
  * @param inputChar Input character read
  * @return Next state of DFA
  */
-int DFA::transition(int currState, char inputChar) {
-    enum characterClass column = identifyClass(inputChar);
-    if (column == INVALID) {
+int DFA::transition(char inputChar) {
+    characterClass column = identifyClass(inputChar);
+    if (column == characterClass::INVALID) {
         return -1; // -1 represents error state
-    } else if (column == AND || column == OR) {
-        return 98;
-    } else if (column == QUOTE) {
+    } else if (column == characterClass::QUOTE) {
         return 99;
     }
-    return transitionTable[curr_state][column];
+    return transitionTable[curr_state][static_cast<int>(column)];
 }

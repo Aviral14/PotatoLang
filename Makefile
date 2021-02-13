@@ -1,6 +1,6 @@
 CC = g++
 OUT_DIR = build
-CFLAGS = -c -Wall -Werror -Wpedantic -g
+CFLAGS = -c -Wall -Werror -Wpedantic -Wunreachable-code -Wextra -g
 TFLAGS = -D TEST
 INC = -I includes
 all : compiler

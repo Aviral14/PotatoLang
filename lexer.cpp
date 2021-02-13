@@ -1,12 +1,11 @@
 #include "lexer.hpp"
 #include <algorithm>
+#include <array>
 #include <iostream>
 #include <string>
 #include <utility>
-#include <vector>
 
 using std::find;
-using std::vector;
 /**
  * Constructor
  * @param code Full code to be lexed
@@ -26,21 +25,21 @@ string Lexer::getString() {
     return string(sp, fp);
 }
 
-/**
- * Handles the error
- * TODO: Return Error code if necessary
- *
- */
 int Lexer::handleStringLiteral() {
     //handle string literal separately
     while (*(++fp) != '"') {
-        if (*fp == '\\' &&
-            (*(fp + 1) != 'n' || *(fp + 1) != 'r' || *(fp + 1) != 't' || *(fp + 1) != '\\')) {
-            handleError();
-        } else if (*fp == '$') {
-            //oof get REKT
-            handleError();
-            return 1;
+        try {
+            if (*fp == '\\' && *(fp + 1) != 'n' && *(fp + 1) != 'r' && *(fp + 1) != 't' && *(fp + 1) != '\\' && *(fp + 1) != '"') {
+                throw exceptionClass::BAD_ESCAPE_SEQUENCE;
+            } else if ((*fp == '\r' || *fp == '\n' || *fp == '"')) {
+                throw exceptionClass::BAD_CHARACTER;
+            } else if (*fp == '$') {
+                //oof get REKT
+                throw exceptionClass::BAD_TERMINATOR;
+                return 1;
+            }
+        } catch (exceptionClass e) {
+            handleError(e);
         }
     }
     fp++;
@@ -49,45 +48,46 @@ int Lexer::handleStringLiteral() {
     return 0;
 }
 
-int Lexer::handleAndsOrs() {
-    //handle || and && separately
-    string oper(fp, fp + 2);
-    if (oper != "&&" && oper != "||") {
-        handleError();
-        return 1;
-    }
-    fp += 2;
-    dfa.prev_state = 98;
-    dfa.curr_state = 0;
-    return 0;
-}
+/**
+ * Handles the error
+ * @return Error code
+ *
+ */
+exceptionClass Lexer::handleError(exceptionClass ec) {
 
-int Lexer::handleError() {
-    // seek till next whitespace
-    if (*fp == '\\') {
+    if (ec == exceptionClass::BAD_ESCAPE_SEQUENCE) {
         sp = fp + 1;
-        cout << "Bad escape sequence " << string(fp, fp + 2)
-             << "\nIn Line number: " << line << endl;
-        return 2;
-    } else if (*fp == '&' || *fp == '|') {
-        sp = fp + 1;
-        cout << "Illegal Operator " << string(fp, fp + 1)
-             << "\nIn Line number: " << line << endl;
-        return 3;
-    } else if (*fp == '$') {
-        cout << "Illegal Termination"
-             << "\nIn Line number: " << line << endl;
+        cout << "Bad escape sequence \"" << string(fp, fp + 2) << "\""
+             << "\n\tIn Line number: " << line << endl;
+        return ec;
+    } else if (ec == exceptionClass::BAD_CHARACTER) {
+        sp = fp;
+        cout << "Bad escape sequence \"" << string(fp, fp + 2) << "\""
+             << "\n\tIn Line number: " << line << endl;
+        return ec;
+    } else if (ec == exceptionClass::BAD_TERMINATOR) {
+        cout << "Uxexepcted EOF"
+             << "\n\tIn Line number: " << line << endl;
+    } else if (*(fp - 1) == '&' || *(fp - 1) == '|') {
+        cout << "Invalid Token found \"" << string(fp - 1, fp) << "\""
+             << "\n\tIn Line number: " << line << endl;
+        sp = fp;
+        fp--;
+        dfa.curr_state = 0;
+        return ec;
     } else {
-        cout << "Invalid Token found"
-             << "\nIn Line number: " << line << endl;
+        cout << "Invalid Token found \"" << string(fp, fp + 1) << "\""
+             << "\n\tIn Line number: " << line << endl;
     }
+
+    // seek till next whitespace
     while (*fp != ' ' && *fp != '\n' && *fp != '\t' && *fp != '$') {
         fp++;
     }
     sp = fp;
     fp--; // Retract fp
     dfa.curr_state = 0;
-    return 1;
+    return ec;
 }
 
 /**
@@ -105,22 +105,20 @@ lexResult Lexer::getLexeme() {
             fp++;
         }
         dfa.prev_state = dfa.curr_state;
-        dfa.curr_state = dfa.transition(dfa.curr_state, *fp);
-
-        if (dfa.curr_state == 100) {
-            return {"EOF", "$", 0}; // Reached End State
-        } else if (dfa.curr_state == 99) {
-            if (handleStringLiteral())
-                continue;
-        } else if (dfa.curr_state == 98) {
-            if (handleAndsOrs())
-                continue;
-        } else if (dfa.curr_state == -1) {
-            handleError();
-            dfa.curr_state = 0; // Recover from Error State
+        dfa.curr_state = dfa.transition(*fp);
+        try {
+            if (dfa.curr_state == 100) {
+                return {"EOF", "$", 0}; // Reached End State
+            } else if (dfa.curr_state == 99) {
+                if (handleStringLiteral())
+                    continue;
+            } else if (dfa.curr_state == -1) {
+                throw exceptionClass::BAD_TOKEN;
+            }
+        } catch (exceptionClass e) {
+            handleError(e);
             continue;
         }
-
         // if prev_state = curr_state = 0, we have encountered a whitespace
         if (!dfa.prev_state && !dfa.curr_state) {
             sp++;
@@ -134,18 +132,6 @@ lexResult Lexer::getLexeme() {
             lexeme = getString();
             sp = fp;
             fp--; // Retract fp
-
-            vector<string> keywords = {"int",
-                                       "float",
-                                       "boolean",
-                                       "string",
-                                       "while",
-                                       "until",
-                                       "if",
-                                       "else",
-                                       "true",
-                                       "false"};
-
             switch (dfa.prev_state) {
             case 1:
                 if (find(keywords.begin(), keywords.end(), lexeme) != keywords.end()) {
@@ -164,8 +150,12 @@ lexResult Lexer::getLexeme() {
             case 6:
             case 7:
             case 8:
-            case 98:
+            case 11:
+            case 13:
                 token = "operator";
+                break;
+            case 9:
+                token = "delimiter";
                 break;
             case 99:
                 token = "string literal";

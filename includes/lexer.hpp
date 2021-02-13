@@ -1,6 +1,5 @@
 #pragma once
 
-#include "config.hpp"
 #include "dfa.hpp"
 #include <string>
 #include <utility>
@@ -17,13 +16,11 @@ class Lexer {
     int line;
     DFA dfa;
 
-    string getString(); /*!< Fetches string between the Start Pointer and the
+    string getString();                              /*!< Fetches string between the Start Pointer and the
                            Forward Pointer. */
-    int handleError();  /*!< Handle Error if any. */
+    exceptionClass handleError(enum exceptionClass); /*!< Handle Error if any. */
 
-    int handleStringLiteral();
-
-    int handleAndsOrs();
+    int handleStringLiteral(); /*!< Handle mini-dfa for String Literal */
 
   public:
     Lexer(string code);
@@ -31,8 +28,7 @@ class Lexer {
     /**
      * Iterates over the provided code
      * Tokenizes the code adhering to the Specified Regular Grammar
-     * Returns {token,lexeme,line number} struct
-     * @return lexResult, a {token,lexeme,line number} pair
+     * @return lexResult, a {token,lexeme,line number} struct
      */
     lexResult getLexeme();
 };
