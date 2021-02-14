@@ -10,7 +10,7 @@ To build the project, execute -
 
 To run the project, execute -
   ```
-  $ ./compiler
+  $ cd build && ./compiler
   ```
   
 To delete all the build files, execute -
