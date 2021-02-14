@@ -7,18 +7,39 @@ using namespace std;
 
 int main() {
     string code;
-#if TEST == 1
-    /*
-    code = "  abcdiu kopk90 9000 7821 0.718 0 fui_8932 00.456 9.120 00.456 00 "
-           "abc90 90_ 90   _fnsi + && - / <= >= == := float$";
-*/
-    code = "\"Hello \\r I'm a fool \\b\" are you/ one int. 3.12 00.4++34 {2<=} &will you |float || sink # while I'm dead? $";
-#else
-    cout << "Enter Your Code" << endl;
-    getline(cin, code, '\n'); // Change delimiter to EOF later
+
+#ifndef TEST
+    code = "";
+    std::string line;
+    while (std::getline(std::cin, line)) {
+        code.append(line);
+        cout << line;
+        code.append("\n");
+    }
     code.append("$");
+#else
+    code = "/* A program to compute factorials */\n"
+           "int fact(int n) {\n"
+           "    if (n <= 1)\n"
+           "        return 1;\n"
+           "    else\n"
+           "        return n * fact(n - 1);\n"
+           "}\n"
+           "void main(void) {\n"
+           "    int x;\n"
+           "    x = 1;\n"
+           "    while (x <= 10) {\n"
+           "        write(x);\n"
+           "        write(fact(x));\n"
+           "        writeln();\n"
+           "        x = x + 1;\n"
+           "    }\n"
+           "}\n"
+           "$";
 #endif
 
+    cout << endl
+         << code << endl;
     Lexer lex(code);
     lexResult res;
 
