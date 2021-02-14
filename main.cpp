@@ -37,9 +37,6 @@ int main() {
            "}\n"
            "$";
 #endif
-
-    cout << endl
-         << code << endl;
     Lexer lex(code);
     lexResult res;
 
