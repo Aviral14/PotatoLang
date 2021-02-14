@@ -14,7 +14,7 @@ Lexer::Lexer(string code) {
     text = code;
     sp = text.begin();
     fp = text.end();
-    line = 0;
+    line = 1;
 }
 
 /**
@@ -82,6 +82,9 @@ exceptionClass Lexer::handleError(exceptionClass ec) {
 
     // seek till next whitespace
     while (*fp != ' ' && *fp != '\n' && *fp != '\t' && *fp != '$') {
+        if (*fp == '\n') {
+            line++; // Increment line counter on encountering a newline.
+        }
         fp++;
     }
     sp = fp;
@@ -106,6 +109,11 @@ lexResult Lexer::getLexeme() {
         }
         dfa.prev_state = dfa.curr_state;
         dfa.curr_state = dfa.transition(*fp);
+
+        if (*fp == '\n') {
+            line++; // Increment line counter on encountering a newline.
+        }
+
         try {
             if (dfa.curr_state == 100) {
                 return {"EOF", "$", 0}; // Reached End State
@@ -131,6 +139,11 @@ lexResult Lexer::getLexeme() {
 
             lexeme = getString();
             sp = fp;
+
+            if (*fp == '\n') {
+                line--; // Decrement line count as we are retracting back.
+            }
+
             fp--; // Retract fp
             switch (dfa.prev_state) {
             case 1:
@@ -161,8 +174,10 @@ lexResult Lexer::getLexeme() {
                 token = "string literal";
                 break;
             }
-            return {token, lexeme,
-                    0}; // Line Number has been hardcoded as 0 for now
+            return {
+                token,
+                lexeme,
+                line};
         }
     }
 }
