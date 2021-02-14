@@ -48,6 +48,26 @@ int Lexer::handleStringLiteral() {
     return 0;
 }
 
+int Lexer::handleComment() {
+    while (*(fp) != '$') {
+        if (*(fp) == '\n') {
+            line++; // Increment line counter on encountering a newline.
+        }
+        if (*(fp) == '*' && (fp + 1) != text.end() && *(fp + 1) == '/') {
+            fp = fp + 1;
+            sp = fp + 1;
+            dfa.curr_state = 0;
+            return 0;
+        }
+        fp++;
+    }
+
+    // Unterminated comment block. May lead to all code after the comment
+    // initialization to be ignored. So, throw an error.
+    fp = sp;
+    throw exceptionClass::UNTERMINATED_COMMENT_BLOCK;
+}
+
 /**
  * Handles the error
  * @return Error code
@@ -68,6 +88,9 @@ exceptionClass Lexer::handleError(exceptionClass ec) {
     } else if (ec == exceptionClass::BAD_TERMINATOR) {
         cout << "Uxexepcted EOF"
              << "\n\tIn Line number: " << line << endl;
+    } else if (ec == exceptionClass::UNTERMINATED_COMMENT_BLOCK) {
+        cout << "Unterminated comment block found on line " << line << endl;
+        dfa.prev_state = 0;
     } else if (*(fp - 1) == '&' || *(fp - 1) == '|') {
         cout << "Invalid Token found \"" << string(fp - 1, fp) << "\""
              << "\n\tIn Line number: " << line << endl;
@@ -98,6 +121,7 @@ exceptionClass Lexer::handleError(exceptionClass ec) {
  * Side Effects on sp and fp
  *
  */
+
 lexResult Lexer::getLexeme() {
     string token, lexeme;
     while (true) {
@@ -107,6 +131,7 @@ lexResult Lexer::getLexeme() {
         } else {
             fp++;
         }
+
         dfa.prev_state = dfa.curr_state;
         dfa.curr_state = dfa.transition(*fp);
 
@@ -115,11 +140,17 @@ lexResult Lexer::getLexeme() {
         }
 
         try {
+
             if (dfa.curr_state == 100) {
                 return {"EOF", "$", 0}; // Reached End State
             } else if (dfa.curr_state == 99) {
                 if (handleStringLiteral())
                     continue;
+            }
+            // Check if a comment is possible
+            else if (*fp == '/' && (fp + 1) != text.end() && *(fp + 1) == '*') {
+                handleComment();
+                continue;
             } else if (dfa.curr_state == -1) {
                 throw exceptionClass::BAD_TOKEN;
             }

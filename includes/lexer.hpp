@@ -22,6 +22,8 @@ class Lexer {
 
     int handleStringLiteral(); /*!< Handle mini-dfa for String Literal */
 
+    int handleComment(); /*!< Handle Comment block */
+
   public:
     Lexer(string code);
 

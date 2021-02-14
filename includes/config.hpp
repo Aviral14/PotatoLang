@@ -55,7 +55,8 @@ enum class exceptionClass {
     BAD_ESCAPE_SEQUENCE,
     BAD_CHARACTER,
     BAD_OPERATOR,
-    BAD_TERMINATOR
+    BAD_TERMINATOR,
+    UNTERMINATED_COMMENT_BLOCK
 };
 
 /*! 
