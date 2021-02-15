@@ -196,10 +196,10 @@ lexResult Lexer::getLexeme() {
             case 8:
             case 11:
             case 13:
-                token = "operator";
+                token = "delimiter";
                 break;
             case 9:
-                token = "delimiter";
+                token = "operator";
                 break;
             case 99:
                 token = "string literal";
