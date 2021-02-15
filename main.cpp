@@ -10,8 +10,8 @@ int main() {
 
 #ifndef TEST
     code = "";
-    std::string line;
-    while (std::getline(std::cin, line)) {
+    string line;
+    while (getline(cin, line)) {
         code.append(line);
         cout << line;
         code.append("\n");
