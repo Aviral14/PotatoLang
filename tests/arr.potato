@@ -1,0 +1,30 @@
+int CITY = 2;
+int WEEK = 7;
+int main()
+{
+  boolean hot=false;  
+  int temperature[CITY][WEEK];
+
+  /* Using nested loop to store values in a 2d array */
+  for (int i = 0; i < CITY; i=i+1)
+  {
+    for (int j = 0; j < WEEK; j+=1)
+    {
+      printf("City %d, Day %d: ", i + 1, j + 1);
+      temperature[i][j]=30.32;
+      if(temperature[i][j]>35.00){
+          hot=true;
+      }
+    }
+  }
+  printf("\nDisplaying values: \n\n");
+
+  /* Using nested loop to display vlues of a 2d array */
+  for (int i = 0; i < CITY; i+=1)
+  {
+    for (int j = 0; j < WEEK; j+=1)
+    {
+      printf("City %d, Day %d = %d\n", i + 1, j + 1, temperature[i][j]);
+    }
+  }
+}

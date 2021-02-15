@@ -64,7 +64,8 @@ int Lexer::handleComment() {
 
     // Unterminated comment block. May lead to all code after the comment
     // initialization to be ignored. So, throw an error.
-    fp = sp;
+    sp = fp;
+    fp--; // Retract fp;
     throw exceptionClass::UNTERMINATED_COMMENT_BLOCK;
 }
 
@@ -73,31 +74,27 @@ int Lexer::handleComment() {
  * @return Error code
  *
  */
-exceptionClass Lexer::handleError(exceptionClass ec) {
+void Lexer::handleError(exceptionClass ec) {
 
     if (ec == exceptionClass::BAD_ESCAPE_SEQUENCE) {
         sp = fp + 1;
         cout << "Bad escape sequence \"" << string(fp, fp + 2) << "\""
              << "\n\tIn Line number: " << line << endl;
-        return ec;
     } else if (ec == exceptionClass::BAD_CHARACTER) {
         sp = fp;
         cout << "Bad escape sequence \"" << string(fp, fp + 2) << "\""
              << "\n\tIn Line number: " << line << endl;
-        return ec;
     } else if (ec == exceptionClass::BAD_TERMINATOR) {
         cout << "Uxexepcted EOF"
              << "\n\tIn Line number: " << line << endl;
     } else if (ec == exceptionClass::UNTERMINATED_COMMENT_BLOCK) {
         cout << "Unterminated comment block found on line " << line << endl;
-        dfa.prev_state = 0;
     } else if (*(fp - 1) == '&' || *(fp - 1) == '|') {
         cout << "Invalid Token found \"" << string(fp - 1, fp) << "\""
              << "\n\tIn Line number: " << line << endl;
         sp = fp;
         fp--;
         dfa.curr_state = 0;
-        return ec;
     } else {
         cout << "Invalid Token found \"" << string(fp, fp + 1) << "\""
              << "\n\tIn Line number: " << line << endl;
@@ -113,7 +110,6 @@ exceptionClass Lexer::handleError(exceptionClass ec) {
     sp = fp;
     fp--; // Retract fp
     dfa.curr_state = 0;
-    return ec;
 }
 
 /**
@@ -142,9 +138,11 @@ lexResult Lexer::getLexeme() {
         try {
 
             if (dfa.curr_state == 100) {
-                return {"EOF", "$", 0}; // Reached End State
+                return {"EOF", "$", line}; // Reached End State
             } else if (dfa.curr_state == 99) {
-                if (handleStringLiteral())
+                if (dfa.prev_state) { // Join DFA with the string tokenizing logic
+                    dfa.curr_state = 0;
+                } else if (handleStringLiteral())
                     continue;
             }
             // Check if a comment is possible
@@ -194,12 +192,14 @@ lexResult Lexer::getLexeme() {
             case 6:
             case 7:
             case 8:
-            case 11:
-            case 13:
-                token = "delimiter";
-                break;
             case 9:
+            case 10:
+            case 13:
+            case 15:
                 token = "operator";
+                break;
+            case 11:
+                token = "delimiter";
                 break;
             case 99:
                 token = "string literal";

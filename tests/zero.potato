@@ -1,0 +1,19 @@
+int main() {
+    float num;
+    string s1 = "zero";
+    string s2 = "Negative";
+    string s2 = "Positive";
+
+    num=100.63
+    x = 90;
+    num=num-x;
+    if (num <= 0.0) {
+        if (num == 0.0)
+            num=!num;
+            printf(s1);
+        else
+            printf(s2);
+    } 
+    if(num>0.0 && num>=0.0 && num!=0)
+        printf(s3);
+}
