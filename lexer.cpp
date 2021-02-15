@@ -64,7 +64,8 @@ int Lexer::handleComment() {
 
     // Unterminated comment block. May lead to all code after the comment
     // initialization to be ignored. So, throw an error.
-    fp = sp;
+    sp = fp;
+    fp--; // Retract fp;
     throw exceptionClass::UNTERMINATED_COMMENT_BLOCK;
 }
 
@@ -153,9 +154,6 @@ lexResult Lexer::getLexeme() {
             }
         } catch (exceptionClass e) {
             handleError(e);
-            if (e == exceptionClass::UNTERMINATED_COMMENT_BLOCK) {
-                return {"EOF", "$", line};
-            }
             continue;
         }
         // if prev_state = curr_state = 0, we have encountered a whitespace
