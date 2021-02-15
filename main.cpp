@@ -13,7 +13,6 @@ int main() {
     string line;
     while (getline(cin, line)) {
         code.append(line);
-        cout << line;
         code.append("\n");
     }
     code.append("$");
