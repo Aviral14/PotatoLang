@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/compiler",
-            "args": [],
+            "args": ["${workspaceFolder}/tests/arr.potato"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

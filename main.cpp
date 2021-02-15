@@ -1,20 +1,34 @@
 // Driver program for PotatoLang Programming Language Compiler
 #include "lexer.hpp"
+#include <fstream>
 #include <iostream>
+#include <sstream>
 #include <utility>
-
-using namespace std;
-
-int main() {
+using std::cout;
+using std::endl;
+using std::ifstream;
+using std::string;
+using std::stringstream;
+int main(int argc, char *argv[]) {
     string code;
 
 #ifndef TEST
     code = "";
     string line;
+    /*
     while (getline(cin, line)) {
         code.append(line);
         code.append("\n");
     }
+    code.erase(code.end() - 1); //remove trailing newline
+    */
+    if (argc != 2) {
+        cout << "Usage: " << argv[0] << " <filename>" << endl;
+    }
+    ifstream f(argv[1]);
+    std::stringstream buffer;
+    buffer << f.rdbuf();
+    code = buffer.str();
     code.append("$");
 #else
     code = "/* A program to compute factorials */\n"
@@ -35,6 +49,7 @@ int main() {
            "    }\n"
            "}\n"
            "$";
+    code = "\"bshh$";
 #endif
     Lexer lex(code);
     lexResult res;

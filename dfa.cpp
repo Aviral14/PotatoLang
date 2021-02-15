@@ -52,8 +52,6 @@ int DFA::transition(char inputChar) {
     characterClass column = identifyClass(inputChar);
     if (column == characterClass::INVALID) {
         return -1; // -1 represents error state
-    } else if (column == characterClass::QUOTE) {
-        return 99;
     }
     return transitionTable[curr_state][static_cast<int>(column)];
 }
