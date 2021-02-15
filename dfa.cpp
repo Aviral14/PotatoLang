@@ -25,7 +25,7 @@ characterClass DFA::identifyClass(char ch) {
         return characterClass::LOGIC;
     } else if (ch == '=') {
         return characterClass::EQU;
-    } else if (ch == '{' || ch == '}' || ch == '(' || ch == ')' || ch == ';' || ch == ',') {
+    } else if (ch == '{' || ch == '}' || ch == '(' || ch == ')' || ch == '[' || ch == ']' || ch == ';' || ch == ',') {
         return characterClass::DELIM;
     } else if (ch == '"') {
         return characterClass::QUOTE;
