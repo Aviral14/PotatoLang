@@ -144,7 +144,9 @@ lexResult Lexer::getLexeme() {
             if (dfa.curr_state == 100) {
                 return {"EOF", "$", 0}; // Reached End State
             } else if (dfa.curr_state == 99) {
-                if (handleStringLiteral())
+                if (dfa.prev_state) { // Join DFA with the string tokenizing logic
+                    dfa.curr_state = 0;
+                } else if (handleStringLiteral())
                     continue;
             }
             // Check if a comment is possible
