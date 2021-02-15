@@ -73,31 +73,27 @@ int Lexer::handleComment() {
  * @return Error code
  *
  */
-exceptionClass Lexer::handleError(exceptionClass ec) {
+void Lexer::handleError(exceptionClass ec) {
 
     if (ec == exceptionClass::BAD_ESCAPE_SEQUENCE) {
         sp = fp + 1;
         cout << "Bad escape sequence \"" << string(fp, fp + 2) << "\""
              << "\n\tIn Line number: " << line << endl;
-        return ec;
     } else if (ec == exceptionClass::BAD_CHARACTER) {
         sp = fp;
         cout << "Bad escape sequence \"" << string(fp, fp + 2) << "\""
              << "\n\tIn Line number: " << line << endl;
-        return ec;
     } else if (ec == exceptionClass::BAD_TERMINATOR) {
         cout << "Uxexepcted EOF"
              << "\n\tIn Line number: " << line << endl;
     } else if (ec == exceptionClass::UNTERMINATED_COMMENT_BLOCK) {
         cout << "Unterminated comment block found on line " << line << endl;
-        dfa.prev_state = 0;
     } else if (*(fp - 1) == '&' || *(fp - 1) == '|') {
         cout << "Invalid Token found \"" << string(fp - 1, fp) << "\""
              << "\n\tIn Line number: " << line << endl;
         sp = fp;
         fp--;
         dfa.curr_state = 0;
-        return ec;
     } else {
         cout << "Invalid Token found \"" << string(fp, fp + 1) << "\""
              << "\n\tIn Line number: " << line << endl;
@@ -113,7 +109,6 @@ exceptionClass Lexer::handleError(exceptionClass ec) {
     sp = fp;
     fp--; // Retract fp
     dfa.curr_state = 0;
-    return ec;
 }
 
 /**
@@ -158,6 +153,9 @@ lexResult Lexer::getLexeme() {
             }
         } catch (exceptionClass e) {
             handleError(e);
+            if (e == exceptionClass::UNTERMINATED_COMMENT_BLOCK) {
+                return {"EOF", "$", line};
+            }
             continue;
         }
         // if prev_state = curr_state = 0, we have encountered a whitespace
