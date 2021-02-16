@@ -4,24 +4,18 @@
 #include <iostream>
 #include <sstream>
 #include <utility>
+
 using std::cout;
 using std::endl;
 using std::ifstream;
 using std::string;
 using std::stringstream;
+
 int main(int argc, char *argv[]) {
     string code;
 
 #ifndef TEST
     code = "";
-    string line;
-    /*
-    while (getline(cin, line)) {
-        code.append(line);
-        code.append("\n");
-    }
-    code.erase(code.end() - 1); //remove trailing newline
-    */
     if (argc != 2) {
         cout << "Usage: " << argv[0] << " <filename>" << endl;
     }
@@ -31,6 +25,9 @@ int main(int argc, char *argv[]) {
     code = buffer.str();
     code.append("$");
 #else
+    if (argc != 1) {
+        cout << "Usage: " << argv[0] << endl;
+    }
     code = "/* A program to compute factorials */\n"
            "int fact(int n) {\n"
            "    if (n <= 1)\n"
@@ -49,7 +46,6 @@ int main(int argc, char *argv[]) {
            "    }\n"
            "}\n"
            "$";
-    code = "\"bshh$";
 #endif
     Lexer lex(code);
     lexResult res;

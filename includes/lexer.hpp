@@ -4,7 +4,8 @@
 #include <string>
 #include <utility>
 
-using namespace std;
+using std::string;
+
 /*! \class Lexer
     \brief Lexer class for handling lexical analysis
 */

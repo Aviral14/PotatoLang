@@ -1,5 +1,6 @@
 #pragma once
 #include "config.hpp"
+
 /*!
   \class DFA
   \brief A DFA
@@ -7,6 +8,7 @@
   Stores the current and previous state
   Transition table as defined in
  */
+
 class DFA {
   public:
     int curr_state;

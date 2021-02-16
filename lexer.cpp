@@ -5,7 +5,10 @@
 #include <string>
 #include <utility>
 
+using std::cout;
+using std::endl;
 using std::find;
+
 /**
  * Constructor
  * @param code Full code to be lexed
@@ -31,7 +34,7 @@ int Lexer::handleStringLiteral() {
         try {
             if (*fp == '\\' && *(fp + 1) != 'n' && *(fp + 1) != 'r' && *(fp + 1) != 't' && *(fp + 1) != '\\' && *(fp + 1) != '"') {
                 throw exceptionClass::BAD_ESCAPE_SEQUENCE;
-            } else if ((*fp == '\r' || *fp == '\n' || *fp == '"')) {
+            } else if (*fp == '\r' || *fp == '\n') {
                 throw exceptionClass::BAD_CHARACTER;
             } else if (*fp == '$') {
                 //oof get REKT
@@ -84,8 +87,18 @@ void Lexer::handleError(exceptionClass ec) {
         return;
     } else if (ec == exceptionClass::BAD_CHARACTER) {
         sp = fp;
-        cout << "Bad character encountered"
-             << "\n\tIn Line number: " << line << endl;
+        cout << "Bad character encountered: ";
+        switch (*fp) {
+        case '\n':
+            cout << "newline (\\n)"
+                 << "\n\tIn Line number: " << line << endl;
+            line++;
+            break;
+        case '\r':
+            cout << "carriage return (\\r)"
+                 << "\n\tIn Line number: " << line << endl;
+            ;
+        }
         return;
     } else if (ec == exceptionClass::BAD_TERMINATOR) {
         cout << "Uxexepcted EOF"

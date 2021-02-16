@@ -1,7 +1,9 @@
 #include "dfa.hpp"
+
 DFA::DFA() {
     prev_state = curr_state = 0;
 }
+
 /**
  * Identifies the character class for each character fed
  *
