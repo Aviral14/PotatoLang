@@ -1,0 +1,131 @@
+keyword int 1
+identifier checkPrimeNumber 1
+delimiter ( 1
+keyword int 1
+identifier n 1
+delimiter ) 1
+delimiter ; 1
+keyword int 2
+identifier main 2
+delimiter ( 2
+delimiter ) 2
+delimiter { 2
+keyword int 3
+identifier n1 3
+delimiter , 3
+identifier n2 3
+delimiter , 3
+identifier i 3
+delimiter , 3
+identifier flag 3
+delimiter ; 3
+identifier n1 4
+operator = 4
+integer literal 2 4
+delimiter ; 4
+identifier n2 5
+operator = 5
+integer literal 5 5
+delimiter ; 5
+identifier printf 6
+delimiter ( 6
+string literal "Prime numbers between %d and %d are: " 6
+delimiter , 6
+identifier n1 6
+delimiter , 6
+identifier n2 6
+delimiter ) 6
+delimiter ; 6
+identifier i 7
+operator = 7
+identifier n1 7
+operator + 7
+integer literal 1 7
+delimiter ; 7
+keyword while 8
+delimiter ( 8
+identifier i 8
+operator < 8
+identifier n2 8
+delimiter ) 8
+delimiter { 8
+identifier flag 11
+operator = 11
+identifier checkPrimeNumber 11
+delimiter ( 11
+identifier i 11
+delimiter ) 11
+delimiter ; 11
+keyword if 13
+delimiter ( 13
+identifier flag 13
+operator == 13
+integer literal 1 13
+delimiter ) 13
+identifier printf 14
+delimiter ( 14
+string literal "%d " 14
+delimiter , 14
+identifier i 14
+delimiter ) 14
+delimiter ; 14
+identifier i 15
+operator = 15
+identifier i 15
+operator + 15
+integer literal 1 15
+delimiter ; 15
+delimiter } 16
+delimiter } 17
+keyword int 20
+identifier checkPrimeNumber 20
+delimiter ( 20
+keyword int 20
+identifier n 20
+delimiter ) 20
+delimiter { 20
+keyword int 21
+identifier j 21
+delimiter , 21
+identifier flag 21
+operator = 21
+integer literal 1 21
+delimiter ; 21
+identifier for 22
+delimiter ( 22
+identifier j 22
+operator = 22
+integer literal 2 22
+delimiter ; 22
+identifier j 22
+operator <= 22
+identifier n 22
+operator / 22
+integer literal 2 22
+delimiter ; 22
+identifier j 22
+operator = 22
+identifier j 22
+operator + 22
+integer literal 1 22
+delimiter ) 22
+delimiter { 22
+keyword if 23
+delimiter ( 23
+identifier n 23
+operator % 23
+identifier j 23
+operator == 23
+integer literal 0 23
+delimiter ) 23
+delimiter { 23
+identifier flag 24
+operator = 24
+integer literal 0 24
+delimiter ; 24
+identifier break 25
+delimiter ; 25
+delimiter } 26
+delimiter } 27
+delimiter } 28
+EOF $ 29

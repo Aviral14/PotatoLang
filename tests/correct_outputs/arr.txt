@@ -1,0 +1,171 @@
+keyword int 1
+identifier CITY 1
+operator = 1
+integer literal 2 1
+delimiter ; 1
+keyword int 2
+identifier WEEK 2
+operator = 2
+integer literal 7 2
+delimiter ; 2
+keyword int 3
+identifier main 3
+delimiter ( 3
+delimiter ) 3
+delimiter { 4
+keyword boolean 5
+identifier hot 5
+operator = 5
+keyword false 5
+delimiter ; 5
+keyword int 6
+identifier temperature 6
+delimiter [ 6
+identifier CITY 6
+delimiter ] 6
+delimiter [ 6
+identifier WEEK 6
+delimiter ] 6
+delimiter ; 6
+identifier for 9
+delimiter ( 9
+keyword int 9
+identifier i 9
+operator = 9
+integer literal 0 9
+delimiter ; 9
+identifier i 9
+operator < 9
+identifier CITY 9
+delimiter ; 9
+identifier i 9
+operator = 9
+identifier i 9
+operator + 9
+integer literal 1 9
+delimiter ) 9
+delimiter { 10
+identifier for 11
+delimiter ( 11
+keyword int 11
+identifier j 11
+operator = 11
+integer literal 0 11
+delimiter ; 11
+identifier j 11
+operator < 11
+identifier WEEK 11
+delimiter ; 11
+identifier j 11
+operator + 11
+operator = 11
+integer literal 1 11
+delimiter ) 11
+delimiter { 12
+identifier printf 13
+delimiter ( 13
+string literal "City %d, Day %d: " 13
+delimiter , 13
+identifier i 13
+operator + 13
+integer literal 1 13
+delimiter , 13
+identifier j 13
+operator + 13
+integer literal 1 13
+delimiter ) 13
+delimiter ; 13
+identifier temperature 14
+delimiter [ 14
+identifier i 14
+delimiter ] 14
+delimiter [ 14
+identifier j 14
+delimiter ] 14
+operator = 14
+floating point literal 30.32 14
+delimiter ; 14
+keyword if 15
+delimiter ( 15
+identifier temperature 15
+delimiter [ 15
+identifier i 15
+delimiter ] 15
+delimiter [ 15
+identifier j 15
+delimiter ] 15
+operator > 15
+floating point literal 35.00 15
+delimiter ) 15
+delimiter { 15
+identifier hot 16
+operator = 16
+keyword true 16
+delimiter ; 16
+delimiter } 17
+delimiter } 18
+delimiter } 19
+identifier printf 20
+delimiter ( 20
+string literal "\nDisplaying values: \n\n" 20
+delimiter ) 20
+delimiter ; 20
+identifier for 23
+delimiter ( 23
+keyword int 23
+identifier i 23
+operator = 23
+integer literal 0 23
+delimiter ; 23
+identifier i 23
+operator < 23
+identifier CITY 23
+delimiter ; 23
+identifier i 23
+operator + 23
+operator = 23
+integer literal 1 23
+delimiter ) 23
+delimiter { 24
+identifier for 25
+delimiter ( 25
+keyword int 25
+identifier j 25
+operator = 25
+integer literal 0 25
+delimiter ; 25
+identifier j 25
+operator < 25
+identifier WEEK 25
+delimiter ; 25
+identifier j 25
+operator + 25
+operator = 25
+integer literal 1 25
+delimiter ) 25
+delimiter { 26
+identifier printf 27
+delimiter ( 27
+string literal "City %d, Day %d = %d\n" 27
+delimiter , 27
+identifier i 27
+operator + 27
+integer literal 1 27
+delimiter , 27
+identifier j 27
+operator + 27
+integer literal 1 27
+delimiter , 27
+identifier temperature 27
+delimiter [ 27
+identifier i 27
+delimiter ] 27
+delimiter [ 27
+identifier j 27
+delimiter ] 27
+delimiter ) 27
+delimiter ; 27
+delimiter } 28
+delimiter } 29
+delimiter } 30
+EOF $ 31

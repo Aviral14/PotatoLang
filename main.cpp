@@ -20,6 +20,10 @@ int main(int argc, char *argv[]) {
         cout << "Usage: " << argv[0] << " <filename>" << endl;
     }
     ifstream f(argv[1]);
+    if (!f) {
+        cout << "FileNotFound:" << argv[1] << endl;
+        return 0;
+    }
     std::stringstream buffer;
     buffer << f.rdbuf();
     code = buffer.str();

@@ -1,0 +1,68 @@
+keyword int 1
+identifier main 1
+delimiter ( 1
+delimiter ) 1
+delimiter { 1
+keyword int 2
+identifier n1 2
+delimiter , 2
+identifier n2 2
+delimiter , 2
+identifier n3 2
+delimiter ; 2
+identifier n1 3
+operator = 3
+integer literal 23 3
+delimiter ; 3
+identifier n2 4
+operator = 4
+integer literal 32 4
+delimiter ; 4
+identifier nx 5
+operator = 5
+integer literal 40 5
+delimiter ; 5
+identifier n3 6
+operator = 6
+identifier nx 6
+operator / 6
+identifier n2 6
+operator * 6
+identifier n1 6
+delimiter ; 6
+keyword if 9
+delimiter ( 9
+identifier n1 9
+operator >= 9
+identifier n2 9
+delimiter && 9
+identifier n1 9
+operator >= 9
+operator = 9
+identifier n3 9
+delimiter ) 9
+identifier printf 10
+delimiter ( 10
+string literal "%.2f is the largest number." 10
+Invalid Token found "`"
+	In Line number: 10
+identifier n1 10
+delimiter ) 10
+delimiter ; 10
+keyword if 13
+delimiter ( 13
+identifier n2 13
+operator >= 13
+identifier n1 13
+delimiter && 13
+identifier n2 13
+operator >= 13
+identifier n3 13
+delimiter ) 13
+identifier printf 14
+delimiter ( 14
+Bad terminator encountered: newline (\n)
+	In Line number: 14
+string literal "%.2f is the largest number.\", n2);" 15
+Unterminated comment block found on line 22
+EOF $ 23

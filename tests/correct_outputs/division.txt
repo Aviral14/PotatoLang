@@ -1,0 +1,48 @@
+keyword int 1
+identifier main 1
+delimiter ( 1
+delimiter ) 1
+delimiter { 1
+keyword int 2
+identifier dividend 2
+delimiter , 2
+identifier divisor 2
+delimiter , 2
+identifier quotient 2
+delimiter , 2
+identifier remainder 2
+delimiter ; 2
+identifier dividend 3
+operator = 3
+integer literal 213 3
+identifier divisor 4
+operator = 4
+integer literal 3 4
+identifier quotient 7
+operator = 7
+identifier dividend 7
+operator / 7
+identifier divisor 7
+delimiter ; 7
+identifier remainder 10
+operator = 10
+identifier dividend 10
+operator % 10
+identifier divisor 10
+delimiter ; 10
+identifier printf 12
+delimiter ( 12
+string literal "Quotient = %d\n" 12
+delimiter , 12
+identifier quotient 12
+delimiter ) 12
+delimiter ; 12
+identifier printf 13
+delimiter ( 13
+string literal "Remainder = %d" 13
+delimiter , 13
+identifier remainder 13
+delimiter ) 13
+delimiter ; 13
+delimiter } 14
+EOF $ 15
