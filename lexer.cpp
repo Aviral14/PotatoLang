@@ -32,11 +32,12 @@ int Lexer::handleStringLiteral() {
     //handle string literal separately
     while (*(++fp) != '"') {
         try {
+            /* \r \n \t \\ \" */
             if (*fp == '\\' && *(fp + 1) != 'n' && *(fp + 1) != 'r' && *(fp + 1) != 't' && *(fp + 1) != '\\' && *(fp + 1) != '"') {
                 throw exceptionClass::BAD_ESCAPE_SEQUENCE;
-            } else if (*fp == '\r' || *fp == '\n') {
-                throw exceptionClass::BAD_CHARACTER;
-            } else if (*fp == '$') {
+            } else if (*fp == '\\') {
+                fp++;
+            } else if (*fp == '$' || *fp == '\r' || *fp == '\n') {
                 //oof get REKT
                 throw exceptionClass::BAD_TERMINATOR;
             }
@@ -85,24 +86,26 @@ void Lexer::handleError(exceptionClass ec) {
         cout << "Bad escape sequence \"" << string(fp, fp + 2) << "\""
              << "\n\tIn Line number: " << line << endl;
         return;
-    } else if (ec == exceptionClass::BAD_CHARACTER) {
-        sp = fp;
-        cout << "Bad character encountered: ";
+    } else if (ec == exceptionClass::BAD_TERMINATOR) {
+        cout << "Bad terminator encountered: ";
         switch (*fp) {
         case '\n':
             cout << "newline (\\n)"
                  << "\n\tIn Line number: " << line << endl;
             line++;
-            break;
+            /*if we encounter a newline, it only makes sense to terminate the 
+            string right here*/
+            return;
+
         case '\r':
             cout << "carriage return (\\r)"
                  << "\n\tIn Line number: " << line << endl;
-            ;
+            return;
+        case '$':
+            sp = fp;
+            cout << "EOF"
+                 << "\n\tIn Line number: " << line << endl;
         }
-        return;
-    } else if (ec == exceptionClass::BAD_TERMINATOR) {
-        cout << "Uxexepcted EOF"
-             << "\n\tIn Line number: " << line << endl;
 
     } else if (ec == exceptionClass::UNTERMINATED_COMMENT_BLOCK) {
         cout << "Unterminated comment block found on line " << line << endl;
@@ -220,6 +223,9 @@ lexResult Lexer::getLexeme() {
             case 99:
                 token = "string literal";
                 break;
+            }
+            if (token == "string literal" && *(lexeme.end() - 1) != '\"') {
+                *(lexeme.end() - 1) = '\"'; //if the string ended in a newline instead of proper termination
             }
             return {
                 token,
