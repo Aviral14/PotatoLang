@@ -1,3 +1,6 @@
+/* this is a heavy stress test on the string lexer */
 x=2;
-"sr \" "
-x++;
+"dgkgf\rfddf\nfdg\t gdf \"fg \\"
+"bshh\\
+"bshh\
+x=1;

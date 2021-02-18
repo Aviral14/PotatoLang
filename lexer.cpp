@@ -48,6 +48,9 @@ int Lexer::handleStringLiteral() {
         }
     }
     fp++;
+    // A case that couldn't be handled more elegantly without messing up some other part of the code
+    if (*fp == '\n')
+        line++;
     dfa.prev_state = 99;
     dfa.curr_state = 0;
     return 0;
@@ -94,10 +97,11 @@ void Lexer::handleError(exceptionClass ec) {
             cout << "newline (\\n)"
                  << "\n\tIn Line number: " << line << endl;
             line++;
+            sp = fp + 1;
+            dfa.curr_state = dfa.prev_state = 0; //discard the string entirely.
             /*if we encounter a newline, it only makes sense to terminate the 
             string right here*/
-            seekToQuotation = true;
-            break;
+            return;
         case '\r':
             cout << "carriage return (\\r)"
                  << "\n\tIn Line number: " << line << endl;
@@ -124,13 +128,21 @@ void Lexer::handleError(exceptionClass ec) {
     }
 
     if (seekToQuotation) {
-        while (!(*fp == '\"' && *(fp - 1) != '\\') && *fp != '$') {
+        while ((!(*fp == '\"' && *(fp - 1) != '\\') && *fp == '\n') && *fp != '$') {
             fp++;
         }
         if (*fp == '$') { //if the mofo decided to make an error and not terminate.
             sp = fp;
+            fp--;
+            dfa.curr_state = 0;
             cout << "EOF"
                  << "\n\tIn Line number: " << line << endl;
+        } else if (*fp == '\n') {
+            cout << "Unexpected newline (\\n)"
+                 << "\n\tIn Line number: " << line << endl;
+            line++;
+            sp = fp + 1;
+            dfa.curr_state = dfa.prev_state = 0; //discard the string entirely.
         } else {
             sp = fp + 1;
             dfa.curr_state = dfa.prev_state = 0; //discard the string entirely.

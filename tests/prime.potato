@@ -1,7 +1,8 @@
 int checkPrimeNumber(int n);
 int main() {
     int n1, n2, i, flag;
-    n1=2;
+    /*this number should generate an error*/ 
+    n1=2 .34;
     n2=5;
     printf("Prime numbers between %d and %d are: ", n1, n2);
     i=n1+1;
@@ -25,4 +26,6 @@ int checkPrimeNumber(int n) {
             break;
         }
     }
+    /* this unterminated quote should generate an error */ 
+    printf("The number %d is prime\",n);
 }

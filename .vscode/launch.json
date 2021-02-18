@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/compiler",
-            "args": ["${workspaceFolder}/tests/compare.potato"],
+            "args": ["${workspaceFolder}/tests/stringtest.potato"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
