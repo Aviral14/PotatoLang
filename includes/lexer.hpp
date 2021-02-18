@@ -17,9 +17,9 @@ class Lexer {
     int line;
     DFA dfa;
 
-    string getString();                    /*!< Fetches string between the Start Pointer and the
+    string getString();               /*!< Fetches string between the Start Pointer and the
                            Forward Pointer. */
-    void handleError(enum exceptionClass); /*!< Handle Error if any. */
+    void handleError(exceptionClass); /*!< Handle Error if any. */
 
     int handleStringLiteral(); /*!< Handle mini-dfa for String Literal */
 

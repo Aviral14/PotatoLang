@@ -80,12 +80,13 @@ int Lexer::handleComment() {
  *
  */
 void Lexer::handleError(exceptionClass ec) {
-
+    bool seekToQuotation = false;
     if (ec == exceptionClass::BAD_ESCAPE_SEQUENCE) {
         sp = fp + 1;
         cout << "Bad escape sequence \"" << string(fp, fp + 2) << "\""
              << "\n\tIn Line number: " << line << endl;
-        return;
+        seekToQuotation = true;
+
     } else if (ec == exceptionClass::BAD_TERMINATOR) {
         cout << "Bad terminator encountered: ";
         switch (*fp) {
@@ -95,12 +96,13 @@ void Lexer::handleError(exceptionClass ec) {
             line++;
             /*if we encounter a newline, it only makes sense to terminate the 
             string right here*/
-            return;
-
+            seekToQuotation = true;
+            break;
         case '\r':
             cout << "carriage return (\\r)"
                  << "\n\tIn Line number: " << line << endl;
-            return;
+            seekToQuotation = true;
+            break;
         case '$':
             sp = fp;
             cout << "EOF"
@@ -119,6 +121,21 @@ void Lexer::handleError(exceptionClass ec) {
     } else {
         cout << "Invalid Token found \"" << string(fp, fp + 1) << "\""
              << "\n\tIn Line number: " << line << endl;
+    }
+
+    if (seekToQuotation) {
+        while (!(*fp == '\"' && *(fp - 1) != '\\') && *fp != '$') {
+            fp++;
+        }
+        if (*fp == '$') { //if the mofo decided to make an error and not terminate.
+            sp = fp;
+            cout << "EOF"
+                 << "\n\tIn Line number: " << line << endl;
+        } else {
+            sp = fp + 1;
+            dfa.curr_state = dfa.prev_state = 0; //discard the string entirely.
+        }
+        return;
     }
 
     // seek till next whitespace
@@ -223,9 +240,6 @@ lexResult Lexer::getLexeme() {
             case 99:
                 token = "string literal";
                 break;
-            }
-            if (token == "string literal" && *(lexeme.end() - 1) != '\"') {
-                *(lexeme.end() - 1) = '\"'; //if the string ended in a newline instead of proper termination
             }
             return {
                 token,
