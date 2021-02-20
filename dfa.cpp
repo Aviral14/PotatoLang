@@ -1,3 +1,9 @@
+/**
+ * Abhinav Sukumar Rao 2018A7PS0172H
+ * Aviral Agarwal 2018A7PS0192H
+ * Divyanshu Agrawal 2018A7PS0267H
+ */
+
 #include "dfa.hpp"
 
 DFA::DFA() {
