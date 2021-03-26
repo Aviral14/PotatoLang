@@ -1,0 +1,2628 @@
+{
+  "grammar": {
+    "alphabet": [
+      "PROG'",
+      "PROG",
+      "ST_LIST",
+      "ST",
+      "TERM_1",
+      "TERM_2",
+      "EXPR",
+      "LIT",
+      "FUNC",
+      "TERM_3",
+      "ARG_LIST",
+      "ARG",
+      "ARR",
+      "DAT",
+      ";",
+      "id",
+      "=",
+      "while",
+      "(",
+      ")",
+      "{",
+      "}",
+      "if",
+      "for",
+      "println",
+      "break",
+      "op",
+      "num",
+      "str",
+      "fl",
+      "bool",
+      ",",
+      "[",
+      "]",
+      "int",
+      "float",
+      "boolean",
+      "string"
+    ],
+    "nonterminals": [
+      "PROG'",
+      "PROG",
+      "ST_LIST",
+      "ST",
+      "TERM_1",
+      "TERM_2",
+      "EXPR",
+      "LIT",
+      "FUNC",
+      "TERM_3",
+      "ARG_LIST",
+      "ARG",
+      "ARR",
+      "DAT"
+    ],
+    "terminals": [
+      ";",
+      "id",
+      "=",
+      "while",
+      "(",
+      ")",
+      "{",
+      "}",
+      "if",
+      "for",
+      "println",
+      "break",
+      "op",
+      "num",
+      "str",
+      "fl",
+      "bool",
+      ",",
+      "[",
+      "]",
+      "int",
+      "float",
+      "boolean",
+      "string"
+    ],
+    "rules": [
+      {
+        "index": 0,
+        "nonterminal": "PROG'",
+        "pattern": [
+          "PROG'"
+        ],
+        "development": [
+          "PROG"
+        ]
+      },
+      {
+        "index": 1,
+        "nonterminal": "PROG",
+        "pattern": [
+          "PROG"
+        ],
+        "development": [
+          "FUNC"
+        ]
+      },
+      {
+        "index": 2,
+        "nonterminal": "PROG",
+        "pattern": [
+          "PROG"
+        ],
+        "development": [
+          "''"
+        ]
+      },
+      {
+        "index": 3,
+        "nonterminal": "ST_LIST",
+        "pattern": [
+          "ST_LIST"
+        ],
+        "development": [
+          "ST",
+          ";",
+          "ST_LIST"
+        ]
+      },
+      {
+        "index": 4,
+        "nonterminal": "ST_LIST",
+        "pattern": [
+          "ST_LIST"
+        ],
+        "development": [
+          "''"
+        ]
+      },
+      {
+        "index": 5,
+        "nonterminal": "ST",
+        "pattern": [
+          "ST"
+        ],
+        "development": [
+          "DAT",
+          "TERM_1"
+        ]
+      },
+      {
+        "index": 6,
+        "nonterminal": "TERM_1",
+        "pattern": [
+          "TERM_1"
+        ],
+        "development": [
+          "id"
+        ]
+      },
+      {
+        "index": 7,
+        "nonterminal": "TERM_1",
+        "pattern": [
+          "TERM_1"
+        ],
+        "development": [
+          "ARR"
+        ]
+      },
+      {
+        "index": 8,
+        "nonterminal": "ST",
+        "pattern": [
+          "ST"
+        ],
+        "development": [
+          "id",
+          "=",
+          "EXPR"
+        ]
+      },
+      {
+        "index": 9,
+        "nonterminal": "ST",
+        "pattern": [
+          "ST"
+        ],
+        "development": [
+          "while",
+          "(",
+          "EXPR",
+          ")",
+          "{",
+          "ST_LIST",
+          "}"
+        ]
+      },
+      {
+        "index": 10,
+        "nonterminal": "ST",
+        "pattern": [
+          "ST"
+        ],
+        "development": [
+          "if",
+          "(",
+          "EXPR",
+          ")",
+          "{",
+          "ST_LIST",
+          "}"
+        ]
+      },
+      {
+        "index": 11,
+        "nonterminal": "ST",
+        "pattern": [
+          "ST"
+        ],
+        "development": [
+          "for",
+          "(",
+          "EXPR",
+          ";",
+          "EXPR",
+          ";",
+          "EXPR",
+          ")",
+          "{",
+          "ST_LIST",
+          "}"
+        ]
+      },
+      {
+        "index": 12,
+        "nonterminal": "ST",
+        "pattern": [
+          "ST"
+        ],
+        "development": [
+          "println",
+          "(",
+          "TERM_2",
+          ")"
+        ]
+      },
+      {
+        "index": 13,
+        "nonterminal": "TERM_2",
+        "pattern": [
+          "TERM_2"
+        ],
+        "development": [
+          "id"
+        ]
+      },
+      {
+        "index": 14,
+        "nonterminal": "TERM_2",
+        "pattern": [
+          "TERM_2"
+        ],
+        "development": [
+          "LIT"
+        ]
+      },
+      {
+        "index": 15,
+        "nonterminal": "ST",
+        "pattern": [
+          "ST"
+        ],
+        "development": [
+          "FUNC"
+        ]
+      },
+      {
+        "index": 16,
+        "nonterminal": "ST",
+        "pattern": [
+          "ST"
+        ],
+        "development": [
+          "break"
+        ]
+      },
+      {
+        "index": 17,
+        "nonterminal": "EXPR",
+        "pattern": [
+          "EXPR"
+        ],
+        "development": [
+          "id"
+        ]
+      },
+      {
+        "index": 18,
+        "nonterminal": "EXPR",
+        "pattern": [
+          "EXPR"
+        ],
+        "development": [
+          "LIT"
+        ]
+      },
+      {
+        "index": 19,
+        "nonterminal": "EXPR",
+        "pattern": [
+          "EXPR"
+        ],
+        "development": [
+          "(",
+          "EXPR",
+          "op",
+          "EXPR",
+          ")"
+        ]
+      },
+      {
+        "index": 20,
+        "nonterminal": "LIT",
+        "pattern": [
+          "LIT"
+        ],
+        "development": [
+          "num"
+        ]
+      },
+      {
+        "index": 21,
+        "nonterminal": "LIT",
+        "pattern": [
+          "LIT"
+        ],
+        "development": [
+          "str"
+        ]
+      },
+      {
+        "index": 22,
+        "nonterminal": "LIT",
+        "pattern": [
+          "LIT"
+        ],
+        "development": [
+          "fl"
+        ]
+      },
+      {
+        "index": 23,
+        "nonterminal": "LIT",
+        "pattern": [
+          "LIT"
+        ],
+        "development": [
+          "bool"
+        ]
+      },
+      {
+        "index": 24,
+        "nonterminal": "FUNC",
+        "pattern": [
+          "FUNC"
+        ],
+        "development": [
+          "DAT",
+          "id",
+          "TERM_3"
+        ]
+      },
+      {
+        "index": 25,
+        "nonterminal": "TERM_3",
+        "pattern": [
+          "TERM_3"
+        ],
+        "development": [
+          "(",
+          "ARG",
+          ")",
+          "{",
+          "ST_LIST",
+          "}"
+        ]
+      },
+      {
+        "index": 26,
+        "nonterminal": "TERM_3",
+        "pattern": [
+          "TERM_3"
+        ],
+        "development": [
+          "(",
+          "ARG_LIST",
+          "ARG",
+          ")",
+          "{",
+          "ST_LIST",
+          "}"
+        ]
+      },
+      {
+        "index": 27,
+        "nonterminal": "ARG_LIST",
+        "pattern": [
+          "ARG_LIST"
+        ],
+        "development": [
+          "ARG",
+          ","
+        ]
+      },
+      {
+        "index": 28,
+        "nonterminal": "ARG_LIST",
+        "pattern": [
+          "ARG_LIST"
+        ],
+        "development": [
+          "''"
+        ]
+      },
+      {
+        "index": 29,
+        "nonterminal": "ARG",
+        "pattern": [
+          "ARG"
+        ],
+        "development": [
+          "DAT",
+          "TERM_1"
+        ]
+      },
+      {
+        "index": 30,
+        "nonterminal": "ARR",
+        "pattern": [
+          "ARR"
+        ],
+        "development": [
+          "id",
+          "[",
+          "num",
+          "]"
+        ]
+      },
+      {
+        "index": 31,
+        "nonterminal": "DAT",
+        "pattern": [
+          "DAT"
+        ],
+        "development": [
+          "int"
+        ]
+      },
+      {
+        "index": 32,
+        "nonterminal": "DAT",
+        "pattern": [
+          "DAT"
+        ],
+        "development": [
+          "float"
+        ]
+      },
+      {
+        "index": 33,
+        "nonterminal": "DAT",
+        "pattern": [
+          "DAT"
+        ],
+        "development": [
+          "boolean"
+        ]
+      },
+      {
+        "index": 34,
+        "nonterminal": "DAT",
+        "pattern": [
+          "DAT"
+        ],
+        "development": [
+          "string"
+        ]
+      }
+    ],
+    "firsts": {
+      "PROG'": [
+        "''",
+        "int",
+        "float",
+        "boolean",
+        "string"
+      ],
+      "PROG": [
+        "''",
+        "int",
+        "float",
+        "boolean",
+        "string"
+      ],
+      "ST_LIST": [
+        "''",
+        "id",
+        "while",
+        "if",
+        "for",
+        "println",
+        "break",
+        "int",
+        "float",
+        "boolean",
+        "string"
+      ],
+      "ST": [
+        "id",
+        "while",
+        "if",
+        "for",
+        "println",
+        "break",
+        "int",
+        "float",
+        "boolean",
+        "string"
+      ],
+      "TERM_1": [
+        "id"
+      ],
+      "TERM_2": [
+        "id",
+        "num",
+        "str",
+        "fl",
+        "bool"
+      ],
+      "EXPR": [
+        "id",
+        "(",
+        "num",
+        "str",
+        "fl",
+        "bool"
+      ],
+      "LIT": [
+        "num",
+        "str",
+        "fl",
+        "bool"
+      ],
+      "FUNC": [
+        "int",
+        "float",
+        "boolean",
+        "string"
+      ],
+      "TERM_3": [
+        "("
+      ],
+      "ARG_LIST": [
+        "''",
+        "int",
+        "float",
+        "boolean",
+        "string"
+      ],
+      "ARG": [
+        "int",
+        "float",
+        "boolean",
+        "string"
+      ],
+      "ARR": [
+        "id"
+      ],
+      "DAT": [
+        "int",
+        "float",
+        "boolean",
+        "string"
+      ]
+    },
+    "follows": {
+      "PROG'": [
+        "$"
+      ],
+      "PROG": [
+        "$"
+      ],
+      "FUNC": [
+        "$",
+        ";"
+      ],
+      "ST": [
+        ";"
+      ],
+      "ST_LIST": [
+        "}"
+      ],
+      "DAT": [
+        "id"
+      ],
+      "TERM_1": [
+        ";",
+        ")",
+        ","
+      ],
+      "ARR": [
+        ";",
+        ")",
+        ","
+      ],
+      "EXPR": [
+        ";",
+        ")",
+        "op"
+      ],
+      "TERM_2": [
+        ")"
+      ],
+      "LIT": [
+        ")",
+        ";",
+        "op"
+      ],
+      "TERM_3": [
+        "$",
+        ";"
+      ],
+      "ARG": [
+        ")",
+        ","
+      ],
+      "ARG_LIST": [
+        "int",
+        "float",
+        "boolean",
+        "string"
+      ]
+    },
+    "axiom": "PROG'"
+  },
+  "states": [
+    {
+      "index": 0,
+      "PROG": [
+        {
+          "actionType": "",
+          "actionValue": 1
+        }
+      ],
+      "FUNC": [
+        {
+          "actionType": "",
+          "actionValue": 2
+        }
+      ],
+      "DAT": [
+        {
+          "actionType": "",
+          "actionValue": 3
+        }
+      ],
+      "int": [
+        {
+          "actionType": "s",
+          "actionValue": 4
+        }
+      ],
+      "float": [
+        {
+          "actionType": "s",
+          "actionValue": 5
+        }
+      ],
+      "boolean": [
+        {
+          "actionType": "s",
+          "actionValue": 6
+        }
+      ],
+      "string": [
+        {
+          "actionType": "s",
+          "actionValue": 7
+        }
+      ],
+      "$": [
+        {
+          "actionType": "r",
+          "actionValue": 2
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "$": [
+        {
+          "actionType": "r",
+          "actionValue": 0
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "$": [
+        {
+          "actionType": "r",
+          "actionValue": 1
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": 8
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "id": [
+        {
+          "actionType": "r",
+          "actionValue": 31
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "id": [
+        {
+          "actionType": "r",
+          "actionValue": 32
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "id": [
+        {
+          "actionType": "r",
+          "actionValue": 33
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "id": [
+        {
+          "actionType": "r",
+          "actionValue": 34
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "TERM_3": [
+        {
+          "actionType": "",
+          "actionValue": 9
+        }
+      ],
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": 10
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "$": [
+        {
+          "actionType": "r",
+          "actionValue": 24
+        }
+      ],
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 24
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "ARG": [
+        {
+          "actionType": "",
+          "actionValue": 11
+        }
+      ],
+      "ARG_LIST": [
+        {
+          "actionType": "",
+          "actionValue": 12
+        }
+      ],
+      "DAT": [
+        {
+          "actionType": "",
+          "actionValue": 13
+        }
+      ],
+      "int": [
+        {
+          "actionType": "s",
+          "actionValue": "4"
+        },
+        {
+          "actionType": "r",
+          "actionValue": 28
+        }
+      ],
+      "float": [
+        {
+          "actionType": "s",
+          "actionValue": "5"
+        },
+        {
+          "actionType": "r",
+          "actionValue": 28
+        }
+      ],
+      "boolean": [
+        {
+          "actionType": "s",
+          "actionValue": "6"
+        },
+        {
+          "actionType": "r",
+          "actionValue": 28
+        }
+      ],
+      "string": [
+        {
+          "actionType": "s",
+          "actionValue": "7"
+        },
+        {
+          "actionType": "r",
+          "actionValue": 28
+        }
+      ]
+    },
+    {
+      "index": 11,
+      ")": [
+        {
+          "actionType": "s",
+          "actionValue": 14
+        }
+      ],
+      ",": [
+        {
+          "actionType": "s",
+          "actionValue": 15
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "ARG": [
+        {
+          "actionType": "",
+          "actionValue": 16
+        }
+      ],
+      "DAT": [
+        {
+          "actionType": "",
+          "actionValue": "13"
+        }
+      ],
+      "int": [
+        {
+          "actionType": "s",
+          "actionValue": "4"
+        }
+      ],
+      "float": [
+        {
+          "actionType": "s",
+          "actionValue": "5"
+        }
+      ],
+      "boolean": [
+        {
+          "actionType": "s",
+          "actionValue": "6"
+        }
+      ],
+      "string": [
+        {
+          "actionType": "s",
+          "actionValue": "7"
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "TERM_1": [
+        {
+          "actionType": "",
+          "actionValue": 17
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": 18
+        }
+      ],
+      "ARR": [
+        {
+          "actionType": "",
+          "actionValue": 19
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "{": [
+        {
+          "actionType": "s",
+          "actionValue": 20
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "int": [
+        {
+          "actionType": "r",
+          "actionValue": 27
+        }
+      ],
+      "float": [
+        {
+          "actionType": "r",
+          "actionValue": 27
+        }
+      ],
+      "boolean": [
+        {
+          "actionType": "r",
+          "actionValue": 27
+        }
+      ],
+      "string": [
+        {
+          "actionType": "r",
+          "actionValue": 27
+        }
+      ]
+    },
+    {
+      "index": 16,
+      ")": [
+        {
+          "actionType": "s",
+          "actionValue": 21
+        }
+      ]
+    },
+    {
+      "index": 17,
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 29
+        }
+      ],
+      ",": [
+        {
+          "actionType": "r",
+          "actionValue": 29
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "[": [
+        {
+          "actionType": "s",
+          "actionValue": 22
+        }
+      ],
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 6
+        }
+      ],
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 6
+        }
+      ],
+      ",": [
+        {
+          "actionType": "r",
+          "actionValue": 6
+        }
+      ]
+    },
+    {
+      "index": 19,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 7
+        }
+      ],
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 7
+        }
+      ],
+      ",": [
+        {
+          "actionType": "r",
+          "actionValue": 7
+        }
+      ]
+    },
+    {
+      "index": 20,
+      "ST_LIST": [
+        {
+          "actionType": "",
+          "actionValue": 23
+        }
+      ],
+      "ST": [
+        {
+          "actionType": "",
+          "actionValue": 24
+        }
+      ],
+      "DAT": [
+        {
+          "actionType": "",
+          "actionValue": 25
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": 26
+        }
+      ],
+      "while": [
+        {
+          "actionType": "s",
+          "actionValue": 27
+        }
+      ],
+      "if": [
+        {
+          "actionType": "s",
+          "actionValue": 28
+        }
+      ],
+      "for": [
+        {
+          "actionType": "s",
+          "actionValue": 29
+        }
+      ],
+      "println": [
+        {
+          "actionType": "s",
+          "actionValue": 30
+        }
+      ],
+      "FUNC": [
+        {
+          "actionType": "",
+          "actionValue": 31
+        }
+      ],
+      "break": [
+        {
+          "actionType": "s",
+          "actionValue": 32
+        }
+      ],
+      "int": [
+        {
+          "actionType": "s",
+          "actionValue": "4"
+        }
+      ],
+      "float": [
+        {
+          "actionType": "s",
+          "actionValue": "5"
+        }
+      ],
+      "boolean": [
+        {
+          "actionType": "s",
+          "actionValue": "6"
+        }
+      ],
+      "string": [
+        {
+          "actionType": "s",
+          "actionValue": "7"
+        }
+      ],
+      "}": [
+        {
+          "actionType": "r",
+          "actionValue": 4
+        }
+      ]
+    },
+    {
+      "index": 21,
+      "{": [
+        {
+          "actionType": "s",
+          "actionValue": 33
+        }
+      ]
+    },
+    {
+      "index": 22,
+      "num": [
+        {
+          "actionType": "s",
+          "actionValue": 34
+        }
+      ]
+    },
+    {
+      "index": 23,
+      "}": [
+        {
+          "actionType": "s",
+          "actionValue": 35
+        }
+      ]
+    },
+    {
+      "index": 24,
+      ";": [
+        {
+          "actionType": "s",
+          "actionValue": 36
+        }
+      ]
+    },
+    {
+      "index": 25,
+      "TERM_1": [
+        {
+          "actionType": "",
+          "actionValue": 37
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": 38
+        }
+      ],
+      "ARR": [
+        {
+          "actionType": "",
+          "actionValue": "19"
+        }
+      ]
+    },
+    {
+      "index": 26,
+      "=": [
+        {
+          "actionType": "s",
+          "actionValue": 39
+        }
+      ]
+    },
+    {
+      "index": 27,
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": 40
+        }
+      ]
+    },
+    {
+      "index": 28,
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": 41
+        }
+      ]
+    },
+    {
+      "index": 29,
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": 42
+        }
+      ]
+    },
+    {
+      "index": 30,
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": 43
+        }
+      ]
+    },
+    {
+      "index": 31,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 15
+        }
+      ]
+    },
+    {
+      "index": 32,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 16
+        }
+      ]
+    },
+    {
+      "index": 33,
+      "ST_LIST": [
+        {
+          "actionType": "",
+          "actionValue": 44
+        }
+      ],
+      "ST": [
+        {
+          "actionType": "",
+          "actionValue": "24"
+        }
+      ],
+      "DAT": [
+        {
+          "actionType": "",
+          "actionValue": "25"
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": "26"
+        }
+      ],
+      "while": [
+        {
+          "actionType": "s",
+          "actionValue": "27"
+        }
+      ],
+      "if": [
+        {
+          "actionType": "s",
+          "actionValue": "28"
+        }
+      ],
+      "for": [
+        {
+          "actionType": "s",
+          "actionValue": "29"
+        }
+      ],
+      "println": [
+        {
+          "actionType": "s",
+          "actionValue": "30"
+        }
+      ],
+      "FUNC": [
+        {
+          "actionType": "",
+          "actionValue": "31"
+        }
+      ],
+      "break": [
+        {
+          "actionType": "s",
+          "actionValue": "32"
+        }
+      ],
+      "int": [
+        {
+          "actionType": "s",
+          "actionValue": "4"
+        }
+      ],
+      "float": [
+        {
+          "actionType": "s",
+          "actionValue": "5"
+        }
+      ],
+      "boolean": [
+        {
+          "actionType": "s",
+          "actionValue": "6"
+        }
+      ],
+      "string": [
+        {
+          "actionType": "s",
+          "actionValue": "7"
+        }
+      ],
+      "}": [
+        {
+          "actionType": "r",
+          "actionValue": 4
+        }
+      ]
+    },
+    {
+      "index": 34,
+      "]": [
+        {
+          "actionType": "s",
+          "actionValue": 45
+        }
+      ]
+    },
+    {
+      "index": 35,
+      "$": [
+        {
+          "actionType": "r",
+          "actionValue": 25
+        }
+      ],
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 25
+        }
+      ]
+    },
+    {
+      "index": 36,
+      "ST_LIST": [
+        {
+          "actionType": "",
+          "actionValue": 46
+        }
+      ],
+      "ST": [
+        {
+          "actionType": "",
+          "actionValue": "24"
+        }
+      ],
+      "DAT": [
+        {
+          "actionType": "",
+          "actionValue": "25"
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": "26"
+        }
+      ],
+      "while": [
+        {
+          "actionType": "s",
+          "actionValue": "27"
+        }
+      ],
+      "if": [
+        {
+          "actionType": "s",
+          "actionValue": "28"
+        }
+      ],
+      "for": [
+        {
+          "actionType": "s",
+          "actionValue": "29"
+        }
+      ],
+      "println": [
+        {
+          "actionType": "s",
+          "actionValue": "30"
+        }
+      ],
+      "FUNC": [
+        {
+          "actionType": "",
+          "actionValue": "31"
+        }
+      ],
+      "break": [
+        {
+          "actionType": "s",
+          "actionValue": "32"
+        }
+      ],
+      "int": [
+        {
+          "actionType": "s",
+          "actionValue": "4"
+        }
+      ],
+      "float": [
+        {
+          "actionType": "s",
+          "actionValue": "5"
+        }
+      ],
+      "boolean": [
+        {
+          "actionType": "s",
+          "actionValue": "6"
+        }
+      ],
+      "string": [
+        {
+          "actionType": "s",
+          "actionValue": "7"
+        }
+      ],
+      "}": [
+        {
+          "actionType": "r",
+          "actionValue": 4
+        }
+      ]
+    },
+    {
+      "index": 37,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 5
+        }
+      ]
+    },
+    {
+      "index": 38,
+      "TERM_3": [
+        {
+          "actionType": "",
+          "actionValue": "9"
+        }
+      ],
+      "[": [
+        {
+          "actionType": "s",
+          "actionValue": "22"
+        }
+      ],
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": "10"
+        }
+      ],
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 6
+        }
+      ],
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 6
+        }
+      ],
+      ",": [
+        {
+          "actionType": "r",
+          "actionValue": 6
+        }
+      ]
+    },
+    {
+      "index": 39,
+      "EXPR": [
+        {
+          "actionType": "",
+          "actionValue": 47
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": 48
+        }
+      ],
+      "LIT": [
+        {
+          "actionType": "",
+          "actionValue": 49
+        }
+      ],
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": 50
+        }
+      ],
+      "num": [
+        {
+          "actionType": "s",
+          "actionValue": 51
+        }
+      ],
+      "str": [
+        {
+          "actionType": "s",
+          "actionValue": 52
+        }
+      ],
+      "fl": [
+        {
+          "actionType": "s",
+          "actionValue": 53
+        }
+      ],
+      "bool": [
+        {
+          "actionType": "s",
+          "actionValue": 54
+        }
+      ]
+    },
+    {
+      "index": 40,
+      "EXPR": [
+        {
+          "actionType": "",
+          "actionValue": 55
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": "48"
+        }
+      ],
+      "LIT": [
+        {
+          "actionType": "",
+          "actionValue": "49"
+        }
+      ],
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": "50"
+        }
+      ],
+      "num": [
+        {
+          "actionType": "s",
+          "actionValue": "51"
+        }
+      ],
+      "str": [
+        {
+          "actionType": "s",
+          "actionValue": "52"
+        }
+      ],
+      "fl": [
+        {
+          "actionType": "s",
+          "actionValue": "53"
+        }
+      ],
+      "bool": [
+        {
+          "actionType": "s",
+          "actionValue": "54"
+        }
+      ]
+    },
+    {
+      "index": 41,
+      "EXPR": [
+        {
+          "actionType": "",
+          "actionValue": 56
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": "48"
+        }
+      ],
+      "LIT": [
+        {
+          "actionType": "",
+          "actionValue": "49"
+        }
+      ],
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": "50"
+        }
+      ],
+      "num": [
+        {
+          "actionType": "s",
+          "actionValue": "51"
+        }
+      ],
+      "str": [
+        {
+          "actionType": "s",
+          "actionValue": "52"
+        }
+      ],
+      "fl": [
+        {
+          "actionType": "s",
+          "actionValue": "53"
+        }
+      ],
+      "bool": [
+        {
+          "actionType": "s",
+          "actionValue": "54"
+        }
+      ]
+    },
+    {
+      "index": 42,
+      "EXPR": [
+        {
+          "actionType": "",
+          "actionValue": 57
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": "48"
+        }
+      ],
+      "LIT": [
+        {
+          "actionType": "",
+          "actionValue": "49"
+        }
+      ],
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": "50"
+        }
+      ],
+      "num": [
+        {
+          "actionType": "s",
+          "actionValue": "51"
+        }
+      ],
+      "str": [
+        {
+          "actionType": "s",
+          "actionValue": "52"
+        }
+      ],
+      "fl": [
+        {
+          "actionType": "s",
+          "actionValue": "53"
+        }
+      ],
+      "bool": [
+        {
+          "actionType": "s",
+          "actionValue": "54"
+        }
+      ]
+    },
+    {
+      "index": 43,
+      "TERM_2": [
+        {
+          "actionType": "",
+          "actionValue": 58
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": 59
+        }
+      ],
+      "LIT": [
+        {
+          "actionType": "",
+          "actionValue": 60
+        }
+      ],
+      "num": [
+        {
+          "actionType": "s",
+          "actionValue": "51"
+        }
+      ],
+      "str": [
+        {
+          "actionType": "s",
+          "actionValue": "52"
+        }
+      ],
+      "fl": [
+        {
+          "actionType": "s",
+          "actionValue": "53"
+        }
+      ],
+      "bool": [
+        {
+          "actionType": "s",
+          "actionValue": "54"
+        }
+      ]
+    },
+    {
+      "index": 44,
+      "}": [
+        {
+          "actionType": "s",
+          "actionValue": 61
+        }
+      ]
+    },
+    {
+      "index": 45,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 30
+        }
+      ],
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 30
+        }
+      ],
+      ",": [
+        {
+          "actionType": "r",
+          "actionValue": 30
+        }
+      ]
+    },
+    {
+      "index": 46,
+      "}": [
+        {
+          "actionType": "r",
+          "actionValue": 3
+        }
+      ]
+    },
+    {
+      "index": 47,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 8
+        }
+      ]
+    },
+    {
+      "index": 48,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 17
+        }
+      ],
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 17
+        }
+      ],
+      "op": [
+        {
+          "actionType": "r",
+          "actionValue": 17
+        }
+      ]
+    },
+    {
+      "index": 49,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 18
+        }
+      ],
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 18
+        }
+      ],
+      "op": [
+        {
+          "actionType": "r",
+          "actionValue": 18
+        }
+      ]
+    },
+    {
+      "index": 50,
+      "EXPR": [
+        {
+          "actionType": "",
+          "actionValue": 62
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": "48"
+        }
+      ],
+      "LIT": [
+        {
+          "actionType": "",
+          "actionValue": "49"
+        }
+      ],
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": "50"
+        }
+      ],
+      "num": [
+        {
+          "actionType": "s",
+          "actionValue": "51"
+        }
+      ],
+      "str": [
+        {
+          "actionType": "s",
+          "actionValue": "52"
+        }
+      ],
+      "fl": [
+        {
+          "actionType": "s",
+          "actionValue": "53"
+        }
+      ],
+      "bool": [
+        {
+          "actionType": "s",
+          "actionValue": "54"
+        }
+      ]
+    },
+    {
+      "index": 51,
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 20
+        }
+      ],
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 20
+        }
+      ],
+      "op": [
+        {
+          "actionType": "r",
+          "actionValue": 20
+        }
+      ]
+    },
+    {
+      "index": 52,
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 21
+        }
+      ],
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 21
+        }
+      ],
+      "op": [
+        {
+          "actionType": "r",
+          "actionValue": 21
+        }
+      ]
+    },
+    {
+      "index": 53,
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 22
+        }
+      ],
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 22
+        }
+      ],
+      "op": [
+        {
+          "actionType": "r",
+          "actionValue": 22
+        }
+      ]
+    },
+    {
+      "index": 54,
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 23
+        }
+      ],
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 23
+        }
+      ],
+      "op": [
+        {
+          "actionType": "r",
+          "actionValue": 23
+        }
+      ]
+    },
+    {
+      "index": 55,
+      ")": [
+        {
+          "actionType": "s",
+          "actionValue": 63
+        }
+      ]
+    },
+    {
+      "index": 56,
+      ")": [
+        {
+          "actionType": "s",
+          "actionValue": 64
+        }
+      ]
+    },
+    {
+      "index": 57,
+      ";": [
+        {
+          "actionType": "s",
+          "actionValue": 65
+        }
+      ]
+    },
+    {
+      "index": 58,
+      ")": [
+        {
+          "actionType": "s",
+          "actionValue": 66
+        }
+      ]
+    },
+    {
+      "index": 59,
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 13
+        }
+      ]
+    },
+    {
+      "index": 60,
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 14
+        }
+      ]
+    },
+    {
+      "index": 61,
+      "$": [
+        {
+          "actionType": "r",
+          "actionValue": 26
+        }
+      ],
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 26
+        }
+      ]
+    },
+    {
+      "index": 62,
+      "op": [
+        {
+          "actionType": "s",
+          "actionValue": 67
+        }
+      ]
+    },
+    {
+      "index": 63,
+      "{": [
+        {
+          "actionType": "s",
+          "actionValue": 68
+        }
+      ]
+    },
+    {
+      "index": 64,
+      "{": [
+        {
+          "actionType": "s",
+          "actionValue": 69
+        }
+      ]
+    },
+    {
+      "index": 65,
+      "EXPR": [
+        {
+          "actionType": "",
+          "actionValue": 70
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": "48"
+        }
+      ],
+      "LIT": [
+        {
+          "actionType": "",
+          "actionValue": "49"
+        }
+      ],
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": "50"
+        }
+      ],
+      "num": [
+        {
+          "actionType": "s",
+          "actionValue": "51"
+        }
+      ],
+      "str": [
+        {
+          "actionType": "s",
+          "actionValue": "52"
+        }
+      ],
+      "fl": [
+        {
+          "actionType": "s",
+          "actionValue": "53"
+        }
+      ],
+      "bool": [
+        {
+          "actionType": "s",
+          "actionValue": "54"
+        }
+      ]
+    },
+    {
+      "index": 66,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 12
+        }
+      ]
+    },
+    {
+      "index": 67,
+      "EXPR": [
+        {
+          "actionType": "",
+          "actionValue": 71
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": "48"
+        }
+      ],
+      "LIT": [
+        {
+          "actionType": "",
+          "actionValue": "49"
+        }
+      ],
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": "50"
+        }
+      ],
+      "num": [
+        {
+          "actionType": "s",
+          "actionValue": "51"
+        }
+      ],
+      "str": [
+        {
+          "actionType": "s",
+          "actionValue": "52"
+        }
+      ],
+      "fl": [
+        {
+          "actionType": "s",
+          "actionValue": "53"
+        }
+      ],
+      "bool": [
+        {
+          "actionType": "s",
+          "actionValue": "54"
+        }
+      ]
+    },
+    {
+      "index": 68,
+      "ST_LIST": [
+        {
+          "actionType": "",
+          "actionValue": 72
+        }
+      ],
+      "ST": [
+        {
+          "actionType": "",
+          "actionValue": "24"
+        }
+      ],
+      "DAT": [
+        {
+          "actionType": "",
+          "actionValue": "25"
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": "26"
+        }
+      ],
+      "while": [
+        {
+          "actionType": "s",
+          "actionValue": "27"
+        }
+      ],
+      "if": [
+        {
+          "actionType": "s",
+          "actionValue": "28"
+        }
+      ],
+      "for": [
+        {
+          "actionType": "s",
+          "actionValue": "29"
+        }
+      ],
+      "println": [
+        {
+          "actionType": "s",
+          "actionValue": "30"
+        }
+      ],
+      "FUNC": [
+        {
+          "actionType": "",
+          "actionValue": "31"
+        }
+      ],
+      "break": [
+        {
+          "actionType": "s",
+          "actionValue": "32"
+        }
+      ],
+      "int": [
+        {
+          "actionType": "s",
+          "actionValue": "4"
+        }
+      ],
+      "float": [
+        {
+          "actionType": "s",
+          "actionValue": "5"
+        }
+      ],
+      "boolean": [
+        {
+          "actionType": "s",
+          "actionValue": "6"
+        }
+      ],
+      "string": [
+        {
+          "actionType": "s",
+          "actionValue": "7"
+        }
+      ],
+      "}": [
+        {
+          "actionType": "r",
+          "actionValue": 4
+        }
+      ]
+    },
+    {
+      "index": 69,
+      "ST_LIST": [
+        {
+          "actionType": "",
+          "actionValue": 73
+        }
+      ],
+      "ST": [
+        {
+          "actionType": "",
+          "actionValue": "24"
+        }
+      ],
+      "DAT": [
+        {
+          "actionType": "",
+          "actionValue": "25"
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": "26"
+        }
+      ],
+      "while": [
+        {
+          "actionType": "s",
+          "actionValue": "27"
+        }
+      ],
+      "if": [
+        {
+          "actionType": "s",
+          "actionValue": "28"
+        }
+      ],
+      "for": [
+        {
+          "actionType": "s",
+          "actionValue": "29"
+        }
+      ],
+      "println": [
+        {
+          "actionType": "s",
+          "actionValue": "30"
+        }
+      ],
+      "FUNC": [
+        {
+          "actionType": "",
+          "actionValue": "31"
+        }
+      ],
+      "break": [
+        {
+          "actionType": "s",
+          "actionValue": "32"
+        }
+      ],
+      "int": [
+        {
+          "actionType": "s",
+          "actionValue": "4"
+        }
+      ],
+      "float": [
+        {
+          "actionType": "s",
+          "actionValue": "5"
+        }
+      ],
+      "boolean": [
+        {
+          "actionType": "s",
+          "actionValue": "6"
+        }
+      ],
+      "string": [
+        {
+          "actionType": "s",
+          "actionValue": "7"
+        }
+      ],
+      "}": [
+        {
+          "actionType": "r",
+          "actionValue": 4
+        }
+      ]
+    },
+    {
+      "index": 70,
+      ";": [
+        {
+          "actionType": "s",
+          "actionValue": 74
+        }
+      ]
+    },
+    {
+      "index": 71,
+      ")": [
+        {
+          "actionType": "s",
+          "actionValue": 75
+        }
+      ]
+    },
+    {
+      "index": 72,
+      "}": [
+        {
+          "actionType": "s",
+          "actionValue": 76
+        }
+      ]
+    },
+    {
+      "index": 73,
+      "}": [
+        {
+          "actionType": "s",
+          "actionValue": 77
+        }
+      ]
+    },
+    {
+      "index": 74,
+      "EXPR": [
+        {
+          "actionType": "",
+          "actionValue": 78
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": "48"
+        }
+      ],
+      "LIT": [
+        {
+          "actionType": "",
+          "actionValue": "49"
+        }
+      ],
+      "(": [
+        {
+          "actionType": "s",
+          "actionValue": "50"
+        }
+      ],
+      "num": [
+        {
+          "actionType": "s",
+          "actionValue": "51"
+        }
+      ],
+      "str": [
+        {
+          "actionType": "s",
+          "actionValue": "52"
+        }
+      ],
+      "fl": [
+        {
+          "actionType": "s",
+          "actionValue": "53"
+        }
+      ],
+      "bool": [
+        {
+          "actionType": "s",
+          "actionValue": "54"
+        }
+      ]
+    },
+    {
+      "index": 75,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 19
+        }
+      ],
+      ")": [
+        {
+          "actionType": "r",
+          "actionValue": 19
+        }
+      ],
+      "op": [
+        {
+          "actionType": "r",
+          "actionValue": 19
+        }
+      ]
+    },
+    {
+      "index": 76,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 9
+        }
+      ]
+    },
+    {
+      "index": 77,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 10
+        }
+      ]
+    },
+    {
+      "index": 78,
+      ")": [
+        {
+          "actionType": "s",
+          "actionValue": 79
+        }
+      ]
+    },
+    {
+      "index": 79,
+      "{": [
+        {
+          "actionType": "s",
+          "actionValue": 80
+        }
+      ]
+    },
+    {
+      "index": 80,
+      "ST_LIST": [
+        {
+          "actionType": "",
+          "actionValue": 81
+        }
+      ],
+      "ST": [
+        {
+          "actionType": "",
+          "actionValue": "24"
+        }
+      ],
+      "DAT": [
+        {
+          "actionType": "",
+          "actionValue": "25"
+        }
+      ],
+      "id": [
+        {
+          "actionType": "s",
+          "actionValue": "26"
+        }
+      ],
+      "while": [
+        {
+          "actionType": "s",
+          "actionValue": "27"
+        }
+      ],
+      "if": [
+        {
+          "actionType": "s",
+          "actionValue": "28"
+        }
+      ],
+      "for": [
+        {
+          "actionType": "s",
+          "actionValue": "29"
+        }
+      ],
+      "println": [
+        {
+          "actionType": "s",
+          "actionValue": "30"
+        }
+      ],
+      "FUNC": [
+        {
+          "actionType": "",
+          "actionValue": "31"
+        }
+      ],
+      "break": [
+        {
+          "actionType": "s",
+          "actionValue": "32"
+        }
+      ],
+      "int": [
+        {
+          "actionType": "s",
+          "actionValue": "4"
+        }
+      ],
+      "float": [
+        {
+          "actionType": "s",
+          "actionValue": "5"
+        }
+      ],
+      "boolean": [
+        {
+          "actionType": "s",
+          "actionValue": "6"
+        }
+      ],
+      "string": [
+        {
+          "actionType": "s",
+          "actionValue": "7"
+        }
+      ],
+      "}": [
+        {
+          "actionType": "r",
+          "actionValue": 4
+        }
+      ]
+    },
+    {
+      "index": 81,
+      "}": [
+        {
+          "actionType": "s",
+          "actionValue": 82
+        }
+      ]
+    },
+    {
+      "index": 82,
+      ";": [
+        {
+          "actionType": "r",
+          "actionValue": 11
+        }
+      ]
+    }
+  ]
+}

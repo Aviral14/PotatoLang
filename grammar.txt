@@ -1,0 +1,44 @@
+PROG' -> PROG
+PROG -> FUNC
+PROG -> ''
+
+ST_LIST -> ST ; ST_LIST
+ST_LIST -> ''
+
+ST -> DAT TERM_1
+TERM_1 -> id 
+TERM_1 -> ARR
+ST -> id = EXPR
+ST -> while ( EXPR ) { ST_LIST }
+ST -> if ( EXPR ) { ST_LIST }
+ST -> for ( EXPR ; EXPR ; EXPR ) { ST_LIST }
+ST -> println ( TERM_2 )
+TERM_2 -> id
+TERM_2 -> LIT
+ST -> FUNC
+ST -> break
+
+EXPR -> id 
+EXPR -> LIT 
+EXPR -> ( EXPR op EXPR ) 
+
+LIT -> num 
+LIT -> str 
+LIT -> fl 
+LIT -> bool
+
+FUNC -> DAT id TERM_3
+TERM_3 ->  ( ARG ) { ST_LIST }
+TERM_3 ->  ( ARG_LIST ARG ) { ST_LIST }
+
+ARG_LIST -> ARG ,
+ARG_LIST -> ''
+
+ARG -> DAT TERM_1
+
+ARR -> id [ num ]
+
+DAT -> int
+DAT -> float
+DAT -> boolean
+DAT -> string

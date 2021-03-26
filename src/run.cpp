@@ -1,25 +1,7 @@
-/**
- * Abhinav Sukumar Rao 2018A7PS0172H
- * Aviral Agarwal 2018A7PS0192H
- * Divyanshu Agrawal 2018A7PS0267H
- */
+#include "run.hpp"
 
-// Driver program for PotatoLang Programming Language Compiler
-#include "lexer.hpp"
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <utility>
-
-using std::cout;
-using std::endl;
-using std::ifstream;
-using std::string;
-using std::stringstream;
-
-int main(int argc, char *argv[]) {
+int run(int argc, char *argv[]) {
     string code;
-
 #ifndef TEST
     code = "";
     if (argc != 2) {
@@ -64,4 +46,6 @@ int main(int argc, char *argv[]) {
         res = lex.getLexeme();
         cout << res.token << " " << res.lexeme << " " << res.lineNumber << endl;
     }
+
+    return 0;
 }
