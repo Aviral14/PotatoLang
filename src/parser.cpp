@@ -11,7 +11,7 @@
  *
  *
  */
-Parser::Parser(Lexer lexer) {
+Parser::Parser(string &code) {
 
     // Loading Grammar and Parse Table
     string slr_grammar_json = fileAsString(slr_json_location);
@@ -19,15 +19,28 @@ Parser::Parser(Lexer lexer) {
     states = getStates(slr_grammar_json, grammar);
 
     // Instantiazing Lexer
-    lex = lexer;
+    lex = Lexer(code);
 
     // Setting stack with correct initial values
     st.push("$");
     st.push("0");
+
+    // Initialize variables
+    currState = 0;
 }
 
 void Parser::handleShift(string actionValue) {
     // Push Symbol and State
+    if (symbol == "keyword") {
+        if (std::find(datatype.begin(), datatype.end(), symbolLex) != datatype.end()) {
+            //it is a datatype
+            symbol = "dat";
+        } else {
+            symbol = symbolLex;
+        }
+    } else if (symbol == "delimiter") {
+        symbol = symbolLex;
+    }
     st.push(symbol);
     st.push(actionValue);
 
@@ -54,8 +67,13 @@ void Parser::handleReduce(string actionValue) {
 
     // Update Current State and Symbol
     currState = stoi(st.top());
+
     prevSymbol = symbol;
+    prevSymbolLex = symbolLex;
+
     symbol = nt;
+    symbolLex = "";
+    // no symbolLex for a non-terminal
 
     // Update Stack
     st.push(nt);
@@ -87,6 +105,7 @@ void Parser::transit(string actionType, string actionValue) {
 void Parser::startParsing() {
     // Scanning first symbol
     symbol = lex.getLexeme().token;
+    symbolLex = lex.getLexeme().lexeme;
 
     while (symbol != "END") {
         try {

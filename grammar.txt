@@ -5,7 +5,7 @@ PROG -> ''
 ST_LIST -> ST ST_LIST
 ST_LIST -> ''
 
-ST -> DAT TERM_1 ;
+ST -> dat TERM_1 ;
 TERM_1 -> id 
 TERM_1 -> ARR
 ST -> id = EXPR ;
@@ -31,16 +31,16 @@ EXPR -> ( EXPR op EXPR )
 
 LIT -> int 
 LIT -> str 
-LIT -> fl 
+LIT -> flt 
 LIT -> boolean
 
-FUNC -> DAT id TERM_3
+FUNC -> dat id TERM_3
 TERM_3 ->  ( ARG_LIST ) { ST_LIST }
 
 ARG_LIST -> ARG ARG_LIST
 ARG_LIST -> , ARG_LIST
 ARG_LIST -> ''
 
-ARG -> DAT TERM_1
+ARG -> dat TERM_1
 
-ARR -> id [ num ]
+ARR -> id [ int ]

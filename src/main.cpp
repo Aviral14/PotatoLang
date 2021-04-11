@@ -44,10 +44,10 @@ int main(int argc, char *argv[]) {
            "$";
 #endif
     // Initialializing Lexer
-    Lexer lexer(code);
+    //Lexer lexer(code);
 
     // Instantiazing Parser
-    Parser parser(lexer);
+    Parser parser(code);
 
     // Beginning Parsing
     parser.startParsing();
