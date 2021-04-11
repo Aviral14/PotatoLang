@@ -70,7 +70,7 @@ void Parser::transit(string actionType, string actionValue) {
     } else if (!actionType.compare("")) {
         handleGOTO(actionValue);
     } else if (!actionType.compare("acc")) {
-        // pass
+        symbol="END"; // Got ACC , ending Parsing
     } else {
         throw exceptionClass::INVALID_PARSE_TABLE;
     }
@@ -80,12 +80,13 @@ void Parser::startParsing() {
     // Scanning first symbol
     symbol = lex.getLexeme().token;
 
-    while (symbol != "EOF") {
+    while (symbol != "END") {
         try {
             Action action = states[currState].actions[symbol][0];
             transit(action.actionType, action.actionValue);
         } catch (exceptionClass ec) {
             cout << "Invalid Parse Table! Aborting Parsing.";
+            return;
         }
     }
 }

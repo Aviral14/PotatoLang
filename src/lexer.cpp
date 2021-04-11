@@ -195,7 +195,7 @@ lexResult Lexer::getLexeme() {
         try {
 
             if (dfa.curr_state == 100) {
-                return {"EOF", "$", line}; // Reached End State
+                return {"$", "$", line}; // Reached End State
             } else if (dfa.curr_state == 99) {
                 if (handleStringLiteral())
                     continue;
