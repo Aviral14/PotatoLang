@@ -2,7 +2,15 @@
 #include "config.hpp"
 #include "lib.hpp"
 #include <iostream>
-
+#include <string>
+/** 
+ * TODO
+ * keep updating json
+ * delimiters and keywords need to be further filtered
+ * add error handling for parsing
+ *
+ *
+ */
 Parser::Parser(Lexer lexer) {
 
     // Loading Grammar and Parse Table
@@ -33,11 +41,11 @@ void Parser::handleShift(string actionValue) {
 void Parser::handleReduce(string actionValue) {
     // Get the production rule for reduction
     Rule prod = grammar.rules[stoi(actionValue)];
-    string nt = prod.nonterminal;
-    vector<string> dev = prod.development;
+    std::string nt = prod.nonterminal;
+    vector<std::string> dev = prod.development;
 
     // Perfrom Reduction
-    for (string::iterator it = dev.begin(); it != dev.end();) {
+    for (std::vector<std::string>::iterator it = dev.begin(); it != dev.end();) {
         if (!st.top().compare(*it)) {
             it++;
         }
@@ -70,7 +78,7 @@ void Parser::transit(string actionType, string actionValue) {
     } else if (!actionType.compare("")) {
         handleGOTO(actionValue);
     } else if (!actionType.compare("acc")) {
-        symbol="END"; // Got ACC , ending Parsing
+        symbol = "END"; // Got ACC , ending Parsing
     } else {
         throw exceptionClass::INVALID_PARSE_TABLE;
     }

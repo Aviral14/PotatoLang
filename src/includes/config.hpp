@@ -26,6 +26,11 @@ const array<string, 10> keywords = {"int",
                                     "else",
                                     "true",
                                     "false"};
+
+const array<string, 4> datatype = {"int",
+                                   "float",
+                                   "boolean",
+                                   "string"};
 /**
      \brief Transition Table-
           char->  alpha   zero   numeric   dot   whitespace  arith   log  equ  delim    "      &      |     EOF 

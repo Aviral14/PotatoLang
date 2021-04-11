@@ -95,9 +95,9 @@ vector<State> getStates(string jsonString, Grammar g) {
                 auto type = action["actionValue"].GetType();
                 if (type == Type::kStringType) {
                     currAction.actionValue =
-                        stoi(action["actionValue"].GetString());
+                        action["actionValue"].GetString();
                 } else {
-                    currAction.actionValue = action["actionValue"].GetInt();
+                    currAction.actionValue = to_string(action["actionValue"].GetInt());
                 }
                 currState.actions[key].push_back(currAction);
             }

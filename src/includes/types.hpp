@@ -1,8 +1,10 @@
 #pragma once
+#include <string>
 #include <unordered_map>
 #include <vector>
-
-using namespace std;
+using std::string;
+using std::unordered_map;
+using std::vector;
 
 /*! \struct LexResult
     \brief Store the result of lexer as a pair
@@ -60,7 +62,7 @@ struct Rule {
 
 struct Action {
     string actionType;
-    int actionValue;
+    string actionValue;
 };
 
 struct State {

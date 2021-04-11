@@ -234,15 +234,15 @@ lexResult Lexer::getLexeme() {
                 if (find(keywords.begin(), keywords.end(), lexeme) != keywords.end()) {
                     token = "keyword";
                 } else {
-                    token = "identifier";
+                    token = "id";
                 }
                 break;
             case 2:
             case 3:
-                token = "integer literal";
+                token = "int";
                 break;
             case 5:
-                token = "floating point literal";
+                token = "flt";
                 break;
             case 6:
             case 7:
@@ -251,13 +251,13 @@ lexResult Lexer::getLexeme() {
             case 10:
             case 13:
             case 15:
-                token = "operator";
+                token = "op";
                 break;
             case 11:
                 token = "delimiter";
                 break;
             case 99:
-                token = "string literal";
+                token = "str";
                 break;
             }
             return {

@@ -3,6 +3,7 @@
 #include "lexer.hpp"
 #include "table.hpp"
 #include <stack>
+using std::stack;
 
 class Parser {
     vector<State> states; // The Parse Table
