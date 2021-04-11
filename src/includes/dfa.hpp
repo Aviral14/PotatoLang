@@ -1,5 +1,5 @@
 #pragma once
-#include "config.hpp"
+#include "types.hpp"
 
 /*!
   \class DFA

@@ -4,6 +4,53 @@
 
 using namespace std;
 
+/*! \struct LexResult
+    \brief Store the result of lexer as a pair
+    Structure for storing token, lexeme pairs from lexer
+*/
+struct lexResult {
+    string token;
+    string lexeme;
+    int line;
+};
+
+/*! \enum characterClass
+    \brief Character Classes
+    invalid character- all characters which are not specified in Regular Grammar
+    alpha- a-z|A-Z|_
+    zero- 0
+    numeric- 1-9
+    whitespace- ' '|'\n'|'\t'
+    endoffile- $
+ */
+enum class characterClass {
+    INVALID = -1,
+    ALPHA = 0,
+    ZERO,
+    NUMERIC,
+    DOT,
+    WHITESPACE,
+    ARITH,
+    LOGIC,
+    EQU,
+    DELIM,
+    QUOTE,
+    AND,
+    OR,
+    ENDOFFILE,
+
+};
+
+enum class exceptionClass {
+    BAD_TOKEN,
+    BAD_ESCAPE_SEQUENCE,
+    BAD_CHARACTER,
+    BAD_OPERATOR,
+    BAD_TERMINATOR,
+    UNTERMINATED_COMMENT_BLOCK,
+    INVALID_PARSE_TABLE,
+};
+
 struct Rule {
     size_t index;
     string nonterminal;

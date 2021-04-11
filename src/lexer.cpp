@@ -4,12 +4,13 @@
  * Divyanshu Agrawal 2018A7PS0267H
  */
 
-#include "lexer.hpp"
+#include "includes/lexer.hpp"
+#include "includes/config.hpp"
+#include "includes/types.hpp"
 #include <algorithm>
 #include <array>
 #include <iostream>
 #include <string>
-#include <utility>
 
 using std::cout;
 using std::endl;
