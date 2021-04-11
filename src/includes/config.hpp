@@ -16,16 +16,19 @@ const int MAX_LEXEME_LENGTH = 255;
 /*! 
     \brief Keyword list
  */
-const array<string, 10> keywords = {"int",
+const array<string, 13> keywords = {"int",
                                     "float",
                                     "boolean",
                                     "string",
-                                    "while",
-                                    "until",
+                                    "for",
                                     "if",
+                                    "elif",
                                     "else",
                                     "true",
-                                    "false"};
+                                    "false",
+                                    "println",
+                                    "while",
+                                    "break"};
 
 const array<string, 4> datatype = {"int",
                                    "float",
@@ -46,9 +49,9 @@ const array<string, 4> datatype = {"int",
        9 state equ  0,      0,      0,      -1,      0,       0,      0,    8,    0,    0 ,    0 ,    0,    0
        10 state eq2 0,      0,      0,      -1,      0,       0,      0,    0,    0,    0,     0,     0,    0
        11 state del 0,      0,      0,      -1,      0,       0,      0,    0,    0,    0 ,    0 ,    0,    0
-       12 state &  -1,     -1,     -1,      -1,     -1,      -1,     -1,   -1,   -1,   -1 ,    11,   -1,   -1 
+       12 state &  -1,     -1,     -1,      -1,     -1,      -1,     -1,   -1,   -1,   -1 ,    13,   -1,   -1 
        13 state &2  0,      0,      0,      -1,      0,       0,      0,    0,    0,    0 ,    0 ,    0,    0                  
-       14 state |  -1,     -1,     -1,      -1,     -1,      -1,     -1,   -1,   -1,   -1 ,   -1 ,   13,   -1
+       14 state |  -1,     -1,     -1,      -1,     -1,      -1,     -1,   -1,   -1,   -1 ,   -1 ,   15,   -1
        15 state |2  0,      0,      0,      -1,      0,       0,      0,    0,    0,    0 ,    0 ,    0,    0
        state -1 represents inalid transition and state 100 reperesents end state
        NOTE: due to the large size of the transition table, the mini-dfa
@@ -70,9 +73,9 @@ const int transitionTable[16][13] = {
     {0, 0, 0, -1, 0, 0, 0, 8, 0, 0, 0, 0, 0},             //9
     {0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0},             //10
     {0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0},             //11
-    {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 11, -1, -1}, //12
+    {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 13, -1, -1}, //12
     {0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0},             //13
-    {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 13, -1}, //14
+    {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 15, -1}, //14
     {0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0}};            //15
 
 const string slr_json_location = "slr_info.json";

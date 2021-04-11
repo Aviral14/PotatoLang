@@ -31,16 +31,7 @@ Parser::Parser(string &code) {
 
 void Parser::handleShift(string actionValue) {
     // Push Symbol and State
-    if (symbol == "keyword") {
-        if (std::find(datatype.begin(), datatype.end(), symbolLex) != datatype.end()) {
-            //it is a datatype
-            symbol = "dat";
-        } else {
-            symbol = symbolLex;
-        }
-    } else if (symbol == "delimiter") {
-        symbol = symbolLex;
-    }
+
     st.push(symbol);
     st.push(actionValue);
 
@@ -48,7 +39,8 @@ void Parser::handleShift(string actionValue) {
     currState = stoi(actionValue);
 
     // Fetch next symbol
-    symbol = lex.getLexeme().token;
+    lexResult retval = lex.getLexeme(); // DAT TERM1 ;
+    symbol = retval.token;
 }
 
 void Parser::handleReduce(string actionValue) {
@@ -58,22 +50,21 @@ void Parser::handleReduce(string actionValue) {
     vector<std::string> dev = prod.development;
 
     // Perfrom Reduction
-    for (std::vector<std::string>::iterator it = dev.begin(); it != dev.end();) {
-        if (!st.top().compare(*it)) {
-            it++;
+    if (!dev.empty()) {
+        for (std::vector<std::string>::reverse_iterator it = dev.rbegin(); it != dev.rend();) {
+            if (!st.top().compare(*it)) {
+                it++;
+            }
+            st.pop();
         }
-        st.pop();
     }
 
     // Update Current State and Symbol
     currState = stoi(st.top());
 
     prevSymbol = symbol;
-    prevSymbolLex = symbolLex;
 
     symbol = nt;
-    symbolLex = "";
-    // no symbolLex for a non-terminal
 
     // Update Stack
     st.push(nt);
@@ -97,6 +88,7 @@ void Parser::transit(string actionType, string actionValue) {
         handleGOTO(actionValue);
     } else if (!actionType.compare("acc")) {
         symbol = "END"; // Got ACC , ending Parsing
+        cout << "Successfully Parsed!" << endl;
     } else {
         throw exceptionClass::INVALID_PARSE_TABLE;
     }
@@ -104,8 +96,8 @@ void Parser::transit(string actionType, string actionValue) {
 
 void Parser::startParsing() {
     // Scanning first symbol
-    symbol = lex.getLexeme().token;
-    symbolLex = lex.getLexeme().lexeme;
+    lexResult retval = lex.getLexeme();
+    symbol = retval.token;
 
     while (symbol != "END") {
         try {

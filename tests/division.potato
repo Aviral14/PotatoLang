@@ -7,11 +7,11 @@ int main() {
     divisor = 3;
 
     /*Computes quotient*/
-    quotient = dividend / divisor;
+    quotient = (dividend / divisor);
 
     /* Computes remainder */
-    remainder = dividend % divisor;
+    remainder = (dividend % divisor);
 
-    printf(quotient);
-    printf(remainder);
+    println(quotient);
+    println(remainder);
 }

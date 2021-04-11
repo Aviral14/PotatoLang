@@ -1,31 +1,10 @@
-int checkPrimeNumber(int n);
 int main() {
-    int n1, n2, i, flag;
-    /*this number should generate an error*/ 
-    n1=2 .34;
-    n2=5;
-    printf("Prime numbers between %d and %d are: ", n1, n2);
-    i=n1+1;
-    while(i<n2) {
-
-        /* flag will be equal to 1 if i is prime */
-        flag = checkPrimeNumber(i);
-
-        if (flag == 1)
-            printf("%d ", i);
-        i=i+1;
-    }
-}
-
-/* user-defined function to check prime number */
-int checkPrimeNumber(int n) {
-    int j, flag = 1;
-    for (j = 2; j <= n / 2; j=j+1) {
-        if (n % j == 0) {
-            flag = 0;
-            break;
+    while(1) {
+        if ((n2 > 100)){
+            flag = false;
+            println("Breaking");
+            break
         }
+        n2 = (n2 + 1);
     }
-    /* this unterminated quote should generate an error */ 
-    printf("The number %d is prime\",n);
 }

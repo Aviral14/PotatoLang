@@ -247,18 +247,30 @@ lexResult Lexer::getLexeme() {
             case 6:
             case 7:
             case 8:
-            case 9:
             case 10:
             case 13:
             case 15:
                 token = "op";
                 break;
+            case 9:
             case 11:
-                token = "delimiter";
+                token = lexeme;
                 break;
             case 99:
                 token = "str";
                 break;
+            }
+            if (token == "keyword") {
+                if (std::find(datatype.begin(), datatype.end(), lexeme) != datatype.end()) {
+                    //it is a datatype
+                    token = "dat";
+                } else if (lexeme == "true" || lexeme == "false") {
+                    // It is a boolean literal
+                    token = "boolean";
+                } else {
+                    // It is a statement keyword
+                    token = lexeme;
+                }
             }
             return {
                 token,

@@ -35,7 +35,10 @@ Grammar getGrammar(string jsonString) {
         }
 
         for (auto &d : rule["development"].GetArray()) {
-            currRule.pattern.push_back(d.GetString());
+            string right = d.GetString();
+            if (right != "''") {
+                currRule.development.push_back(right);
+            }
         }
 
         g.rules.push_back(currRule);
