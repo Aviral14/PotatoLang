@@ -5,8 +5,8 @@ TFLAGS = -D TEST
 INC = -I src/includes
 all : compiler
 
-compiler : main.o lexer.o parser.o lib.o table.o dfa.o run.o
-			$(CC) main.o lexer.o parser.o table.o dfa.o lib.o run.o -o compiler
+compiler : main.o lexer.o parser.o lib.o table.o dfa.o
+			$(CC) main.o lexer.o parser.o table.o dfa.o lib.o -o compiler
 		    @mkdir -p $(OUT_DIR)
 		    @mv *.o $(OUT_DIR)
 		    @mv compiler $(OUT_DIR)
@@ -37,10 +37,6 @@ lib.o : src/lib.cpp
 
 table.o: src/table.cpp
 			$(CC) $(CFLAGS) src/table.cpp $(OUTPUT) $(INC)
-
-
-run.o: src/table.cpp
-			$(CC) $(CFLAGS) src/run.cpp $(OUTPUT) $(INC)
 
 clean : 
 			rm -rf $(OUT_DIR) compiler

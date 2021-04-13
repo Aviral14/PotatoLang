@@ -1,14 +1,17 @@
 int main() {
-    int dividend, divisor, quotient, remainder;
-    dividend = 213
-    divisor = 3 
+    int dividend; 
+    int divisor;
+    int quotient; 
+    int remainder;
+    dividend = 213;
+    divisor = 3;
 
     /*Computes quotient*/
-    quotient = dividend / divisor;
+    quotient = (dividend / divisor);
 
     /* Computes remainder */
-    remainder = dividend % divisor;
+    remainder = (dividend % divisor);
 
-    printf("Quotient = %d\n", quotient);
-    printf("Remainder = %d", remainder);
+    println(quotient);
+    println(remainder);
 }

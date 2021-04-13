@@ -4,12 +4,13 @@
  * Divyanshu Agrawal 2018A7PS0267H
  */
 
-#include "lexer.hpp"
+#include "includes/lexer.hpp"
+#include "includes/config.hpp"
+#include "includes/types.hpp"
 #include <algorithm>
 #include <array>
 #include <iostream>
 #include <string>
-#include <utility>
 
 using std::cout;
 using std::endl;
@@ -194,7 +195,7 @@ lexResult Lexer::getLexeme() {
         try {
 
             if (dfa.curr_state == 100) {
-                return {"EOF", "$", line}; // Reached End State
+                return {"$", "$", line}; // Reached End State
             } else if (dfa.curr_state == 99) {
                 if (handleStringLiteral())
                     continue;
@@ -233,31 +234,43 @@ lexResult Lexer::getLexeme() {
                 if (find(keywords.begin(), keywords.end(), lexeme) != keywords.end()) {
                     token = "keyword";
                 } else {
-                    token = "identifier";
+                    token = "id";
                 }
                 break;
             case 2:
             case 3:
-                token = "integer literal";
+                token = "int";
                 break;
             case 5:
-                token = "floating point literal";
+                token = "flt";
                 break;
             case 6:
             case 7:
             case 8:
-            case 9:
             case 10:
             case 13:
             case 15:
-                token = "operator";
+                token = "op";
                 break;
+            case 9:
             case 11:
-                token = "delimiter";
+                token = lexeme;
                 break;
             case 99:
-                token = "string literal";
+                token = "str";
                 break;
+            }
+            if (token == "keyword") {
+                if (std::find(datatype.begin(), datatype.end(), lexeme) != datatype.end()) {
+                    //it is a datatype
+                    token = "dat";
+                } else if (lexeme == "true" || lexeme == "false") {
+                    // It is a boolean literal
+                    token = "boolean";
+                } else {
+                    // It is a statement keyword
+                    token = lexeme;
+                }
             }
             return {
                 token,

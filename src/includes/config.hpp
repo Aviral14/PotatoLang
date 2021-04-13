@@ -13,65 +13,27 @@ using std::string;
 const int MAX_CODE_LENGTH = 1000;
 const int MAX_LEXEME_LENGTH = 255;
 
-/*! \struct LexResult
-    \brief Store the result of lexer as a pair
-    Structure for storing token, lexeme pairs from lexer
-*/
-struct lexResult {
-    string token;
-    string lexeme;
-    int lineNumber;
-};
-
-/*! \enum characterClass
-    \brief Character Classes
-    invalid character- all characters which are not specified in Regular Grammar
-    alpha- a-z|A-Z|_
-    zero- 0
-    numeric- 1-9
-    whitespace- ' '|'\n'|'\t'
-    endoffile- $
- */
-enum class characterClass {
-    INVALID = -1,
-    ALPHA = 0,
-    ZERO,
-    NUMERIC,
-    DOT,
-    WHITESPACE,
-    ARITH,
-    LOGIC,
-    EQU,
-    DELIM,
-    QUOTE,
-    AND,
-    OR,
-    ENDOFFILE,
-
-};
-
-enum class exceptionClass {
-    BAD_TOKEN,
-    BAD_ESCAPE_SEQUENCE,
-    BAD_CHARACTER,
-    BAD_OPERATOR,
-    BAD_TERMINATOR,
-    UNTERMINATED_COMMENT_BLOCK
-};
-
 /*! 
     \brief Keyword list
  */
-const array<string, 10> keywords = {"int",
+const array<string, 13> keywords = {"int",
                                     "float",
                                     "boolean",
                                     "string",
-                                    "while",
-                                    "until",
+                                    "for",
                                     "if",
+                                    "elif",
                                     "else",
                                     "true",
-                                    "false"};
+                                    "false",
+                                    "println",
+                                    "while",
+                                    "break"};
+
+const array<string, 4> datatype = {"int",
+                                   "float",
+                                   "boolean",
+                                   "string"};
 /**
      \brief Transition Table-
           char->  alpha   zero   numeric   dot   whitespace  arith   log  equ  delim    "      &      |     EOF 
@@ -87,9 +49,9 @@ const array<string, 10> keywords = {"int",
        9 state equ  0,      0,      0,      -1,      0,       0,      0,    8,    0,    0 ,    0 ,    0,    0
        10 state eq2 0,      0,      0,      -1,      0,       0,      0,    0,    0,    0,     0,     0,    0
        11 state del 0,      0,      0,      -1,      0,       0,      0,    0,    0,    0 ,    0 ,    0,    0
-       12 state &  -1,     -1,     -1,      -1,     -1,      -1,     -1,   -1,   -1,   -1 ,    11,   -1,   -1 
+       12 state &  -1,     -1,     -1,      -1,     -1,      -1,     -1,   -1,   -1,   -1 ,    13,   -1,   -1 
        13 state &2  0,      0,      0,      -1,      0,       0,      0,    0,    0,    0 ,    0 ,    0,    0                  
-       14 state |  -1,     -1,     -1,      -1,     -1,      -1,     -1,   -1,   -1,   -1 ,   -1 ,   13,   -1
+       14 state |  -1,     -1,     -1,      -1,     -1,      -1,     -1,   -1,   -1,   -1 ,   -1 ,   15,   -1
        15 state |2  0,      0,      0,      -1,      0,       0,      0,    0,    0,    0 ,    0 ,    0,    0
        state -1 represents inalid transition and state 100 reperesents end state
        NOTE: due to the large size of the transition table, the mini-dfa
@@ -111,9 +73,9 @@ const int transitionTable[16][13] = {
     {0, 0, 0, -1, 0, 0, 0, 8, 0, 0, 0, 0, 0},             //9
     {0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0},             //10
     {0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0},             //11
-    {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 11, -1, -1}, //12
+    {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 13, -1, -1}, //12
     {0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0},             //13
-    {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 13, -1}, //14
+    {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 15, -1}, //14
     {0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0}};            //15
 
 const string slr_json_location = "slr_info.json";

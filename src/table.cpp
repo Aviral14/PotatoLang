@@ -1,4 +1,4 @@
-#include "table.hpp"
+#include "includes/table.hpp"
 
 using namespace std;
 
@@ -35,7 +35,10 @@ Grammar getGrammar(string jsonString) {
         }
 
         for (auto &d : rule["development"].GetArray()) {
-            currRule.pattern.push_back(d.GetString());
+            string right = d.GetString();
+            if (right != "''") {
+                currRule.development.push_back(right);
+            }
         }
 
         g.rules.push_back(currRule);
@@ -95,9 +98,9 @@ vector<State> getStates(string jsonString, Grammar g) {
                 auto type = action["actionValue"].GetType();
                 if (type == Type::kStringType) {
                     currAction.actionValue =
-                        stoi(action["actionValue"].GetString());
+                        action["actionValue"].GetString();
                 } else {
-                    currAction.actionValue = action["actionValue"].GetInt();
+                    currAction.actionValue = to_string(action["actionValue"].GetInt());
                 }
                 currState.actions[key].push_back(currAction);
             }

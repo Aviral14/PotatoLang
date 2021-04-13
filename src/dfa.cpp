@@ -5,6 +5,7 @@
  */
 
 #include "dfa.hpp"
+#include "config.hpp"
 
 DFA::DFA() {
     prev_state = curr_state = 0;

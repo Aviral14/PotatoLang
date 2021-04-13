@@ -2,17 +2,24 @@ PROG' -> PROG
 PROG -> FUNC
 PROG -> ''
 
-ST_LIST -> ST ; ST_LIST
+ST_LIST -> ST ST_LIST
 ST_LIST -> ''
 
-ST -> DAT TERM_1
+ST -> dat TERM_1 ;
 TERM_1 -> id 
 TERM_1 -> ARR
-ST -> id = EXPR
+ST -> id = EXPR ;
 ST -> while ( EXPR ) { ST_LIST }
-ST -> if ( EXPR ) { ST_LIST }
+ST -> IF_STMT
+IF_STMT -> if ( EXPR ) { ST_LIST } IF_C
+IF_C -> IF_B IF_D
+IF_B -> elif ( EXPR ) { ST_LIST }
+IF_B -> ''
+IF_D -> else ( EXPR ) { ST_LIST } 
+IF_D -> ''
+
 ST -> for ( EXPR ; EXPR ; EXPR ) { ST_LIST }
-ST -> println ( TERM_2 )
+ST -> println ( TERM_2 ) ;
 TERM_2 -> id
 TERM_2 -> LIT
 ST -> FUNC
@@ -22,23 +29,18 @@ EXPR -> id
 EXPR -> LIT 
 EXPR -> ( EXPR op EXPR ) 
 
-LIT -> num 
+LIT -> int 
 LIT -> str 
-LIT -> fl 
-LIT -> bool
+LIT -> flt 
+LIT -> boolean
 
-FUNC -> DAT id TERM_3
-TERM_3 ->  ( ARG ) { ST_LIST }
-TERM_3 ->  ( ARG_LIST ARG ) { ST_LIST }
+FUNC -> dat id TERM_3
+TERM_3 ->  ( ARG_LIST ) { ST_LIST }
 
-ARG_LIST -> ARG ,
+ARG_LIST -> ARG ARG_LIST
+ARG_LIST -> , ARG_LIST
 ARG_LIST -> ''
 
-ARG -> DAT TERM_1
+ARG -> dat TERM_1
 
-ARR -> id [ num ]
-
-DAT -> int
-DAT -> float
-DAT -> boolean
-DAT -> string
+ARR -> id [ int ]

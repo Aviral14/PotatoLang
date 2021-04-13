@@ -1,12 +1,26 @@
+#pragma once
+
 #include "config.hpp"
-#include "iostream"
-#include "lib.hpp"
-#include "rapidjson/document.h"
-#include "rapidjson/stringbuffer.h"
-#include "rapidjson/writer.h"
+#include "lexer.hpp"
 #include "table.hpp"
-#include "types.hpp"
+#include <stack>
+using std::stack;
 
-using namespace rapidjson;
+class Parser {
+    vector<State> states;     // The Parse Table
+    Grammar grammar;          // PotatoLang Grammar
+    Lexer lex;                // PotatoLang Lexer Instance
+    string symbol; // Symbols of Production Rules
+    string prevSymbol;        // Memory of Symbol
+    int currState;            // Parser state
+    stack<string> st;         // Parser Stack
 
-void testParser();
+    void transit(string, string);
+    void handleShift(string);
+    void handleReduce(string);
+    void handleGOTO(string);
+
+  public:
+    Parser(string &);
+    void startParsing();
+};

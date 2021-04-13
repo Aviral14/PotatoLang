@@ -28,6 +28,7 @@ class Lexer {
   public:
     Lexer(string code);
 
+    Lexer() = default;
     /**
      * Iterates over the provided code
      * Tokenizes the code adhering to the Specified Regular Grammar
