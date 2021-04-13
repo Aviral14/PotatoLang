@@ -1,5 +1,5 @@
 int main() {
-    int dividend; 
+    int dividend /* Error */
     int divisor;
     int quotient; 
     int remainder;
@@ -7,7 +7,7 @@ int main() {
     divisor = 3;
 
     /*Computes quotient*/
-    quotient = (dividend / divisor);
+    quotient = [dividend / divisor];
 
     /* Computes remainder */
     remainder = (dividend % divisor);

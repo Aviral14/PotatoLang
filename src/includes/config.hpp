@@ -16,7 +16,7 @@ const int MAX_LEXEME_LENGTH = 255;
 /*! 
     \brief Keyword list
  */
-const array<string, 13> keywords = {"int",
+const array<string, 12> keywords = {"int",
                                     "float",
                                     "boolean",
                                     "string",
@@ -26,7 +26,6 @@ const array<string, 13> keywords = {"int",
                                     "else",
                                     "true",
                                     "false",
-                                    "println",
                                     "while",
                                     "break"};
 

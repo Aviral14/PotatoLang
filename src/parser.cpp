@@ -1,6 +1,7 @@
 #include "parser.hpp"
 #include "config.hpp"
 #include "lib.hpp"
+#include <fstream>
 #include <iostream>
 #include <string>
 /** 
@@ -31,23 +32,30 @@ Parser::Parser(string &code) {
 
 bool Parser::handleError(exceptionClass ec) {
     if (ec == exceptionClass::INVALID_SYNTAX) {
-        // Emptying stack till safe symbol ';'
-        while (st.top() != ";") {
+        // Emptying stack till safe symbol
+        cout << "Syntax Error at line: " << line << endl;
+        string prevstate = "";
+        while (st.top() != "ST" && st.top() != "{") {
             if (st.top() == "$") {
                 // Safe Symbol was not found, ending parsing
                 return 1;
             }
+            prevstate = st.top();
             st.pop();
         }
-        st.pop(); // Pop ';'
-        while (symbol != ";") {
+        st.push(prevstate);
+        currState = stoi(prevstate);
+
+        while (symbol != ";" && symbol != "}") {
             if (symbol == "$") {
                 // Reached EOF, ending parsing
                 return 1;
             }
             symbol = lex.getLexeme().token;
         }
-        symbol = lex.getLexeme().token; // Start afresh from new symbol
+        lexResult retval = lex.getLexeme(); // Start afresh from new symbol
+        symbol = retval.token;
+        line = retval.line;
     }
     return 0;
 }
@@ -64,6 +72,7 @@ void Parser::handleShift(string actionValue) {
     // Fetch next symbol
     lexResult retval = lex.getLexeme(); // DAT TERM1 ;
     symbol = retval.token;
+    line = retval.line;
 }
 
 void Parser::handleReduce(string actionValue) {
@@ -101,7 +110,21 @@ void Parser::handleGOTO(string actionValue) {
     currState = stoi(actionValue);
     symbol = prevSymbol;
 }
-
+void Parser::printStack() {
+    std::fstream stackFile("stack.txt", std::ios::app);
+    if (!stackFile) {
+        stackFile.open("stack.txt", std::ios::out);
+    }
+    string s = "TOP\n";
+    size_t count = st.size() - 1;
+    for (stack<string> dump = st; !dump.empty(); dump.pop()) {
+        s.append("[" + to_string(count) + "]" + "  " + dump.top() + "\n");
+        count--;
+    }
+    s.append("------------------------------\n\n");
+    stackFile.write(s.c_str(), strlen(s.c_str()));
+    stackFile.close();
+}
 void Parser::transit(string actionType, string actionValue) {
     if (!actionType.compare("s")) {
         handleShift(actionValue);
@@ -115,12 +138,15 @@ void Parser::transit(string actionType, string actionValue) {
     } else {
         throw exceptionClass::INVALID_PARSE_TABLE;
     }
+    //pretty-print stack
+    printStack();
 }
 
 void Parser::startParsing() {
     // Scanning first symbol
     lexResult retval = lex.getLexeme();
     symbol = retval.token;
+    line = retval.line;
 
     while (symbol != "END") {
         try {
