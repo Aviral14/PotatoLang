@@ -51,6 +51,7 @@ enum class exceptionClass {
     BAD_TERMINATOR,
     UNTERMINATED_COMMENT_BLOCK,
     INVALID_PARSE_TABLE,
+    INVALID_SYNTAX,
 };
 
 struct Rule {

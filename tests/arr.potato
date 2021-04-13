@@ -5,7 +5,7 @@ int main()
   i = 0;
   int WEEK;
   WEEK = 7;
-  hot = false;  
+  hot = false`;  
   int temperature[5];
 
   /* Using loop to check hot or co */

@@ -29,6 +29,29 @@ Parser::Parser(string &code) {
     currState = 0;
 }
 
+bool Parser::handleError(exceptionClass ec) {
+    if (ec == exceptionClass::INVALID_SYNTAX) {
+        // Emptying stack till safe symbol ';'
+        while (st.top() != ";") {
+            if (st.top() == "$") {
+                // Safe Symbol was not found, ending parsing
+                return 1;
+            }
+            st.pop();
+        }
+        st.pop(); // Pop ';'
+        while (symbol != ";") {
+            if (symbol == "$") {
+                // Reached EOF, ending parsing
+                return 1;
+            }
+            symbol = lex.getLexeme().token;
+        }
+        symbol = lex.getLexeme().token; // Start afresh from new symbol
+    }
+    return 0;
+}
+
 void Parser::handleShift(string actionValue) {
     // Push Symbol and State
 
@@ -101,11 +124,16 @@ void Parser::startParsing() {
 
     while (symbol != "END") {
         try {
+            auto found = states[currState].actions.find(symbol);
+            if (found == states[currState].actions.end()) {
+                throw exceptionClass::INVALID_SYNTAX;
+            }
             Action action = states[currState].actions[symbol][0];
             transit(action.actionType, action.actionValue);
         } catch (exceptionClass ec) {
-            cout << "Invalid Parse Table! Aborting Parsing.";
-            return;
+            if (handleError(ec)) {
+                return;
+            }
         }
     }
 }
