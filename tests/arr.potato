@@ -1,11 +1,11 @@
 int main()
 {
   boolean hot;
+  hot = false`; 
   int i;
   i = 0;
   int WEEK;
-  WEEK = 7;
-  hot = false`;  
+  WEEK = 7; 
   int temperature[5];
 
   /* Using loop to check hot or co */

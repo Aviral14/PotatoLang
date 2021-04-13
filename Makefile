@@ -40,4 +40,5 @@ table.o: src/table.cpp
 
 clean : 
 			rm -rf $(OUT_DIR) compiler
+			rm stack.txt
 			

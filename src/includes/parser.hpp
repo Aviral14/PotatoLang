@@ -25,4 +25,5 @@ class Parser {
   public:
     Parser(string &);
     void startParsing();
+    void printStack();
 };

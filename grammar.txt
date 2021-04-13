@@ -11,6 +11,7 @@ TERM_1 -> ARR
 ST -> id = EXPR ;
 ST -> while ( EXPR ) { ST_LIST }
 ST -> IF_STMT
+
 IF_STMT -> if ( EXPR ) { ST_LIST } IF_C
 IF_C -> IF_B IF_D
 IF_B -> elif ( EXPR ) { ST_LIST }
@@ -19,7 +20,7 @@ IF_D -> else ( EXPR ) { ST_LIST }
 IF_D -> ''
 
 ST -> for ( EXPR ; EXPR ; EXPR ) { ST_LIST }
-ST -> println ( TERM_2 ) ;
+ST -> id ( TERM_2 ) ;
 TERM_2 -> id
 TERM_2 -> LIT
 ST -> FUNC
