@@ -1,6 +1,6 @@
 # PotatoLang
 
-CS F363 Compiler Construction Project
+Lexer and SLR Parser for PotatoLang Programming Language
 
 # Guides
 
@@ -13,7 +13,7 @@ $ make all
 To run the project, execute -
 
 ```
-$ cd build && ./compiler
+$ build/compiler <filename>
 ```
 
 To delete all the build files, execute -
