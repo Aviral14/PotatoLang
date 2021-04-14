@@ -143,6 +143,9 @@ void Parser::transit(string actionType, string actionValue) {
 }
 
 void Parser::startParsing() {
+    //pretty-print stack
+    printStack();
+
     // Scanning first symbol
     lexResult retval = lex.getLexeme();
     symbol = retval.token;
