@@ -135,6 +135,7 @@ void Parser::transit(string actionType, string actionValue) {
     } else if (!actionType.compare("acc")) {
         symbol = "END"; // Got ACC , ending Parsing
         cout << "Successfully Parsed!" << endl;
+        return;
     } else {
         throw exceptionClass::INVALID_PARSE_TABLE;
     }
