@@ -4,14 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-/** 
- * TODO
- * keep updating json
- * delimiters and keywords need to be further filtered
- * add error handling for parsing
- *
- *
- */
+
 Parser::Parser(string &code) {
 
     // Loading Grammar and Parse Table
